@@ -3,6 +3,9 @@
     "browser": true
   },
   "extends": "airbnb-typescript",
+  "globals": {
+    "React": "writable"
+  },
   "parser": "@typescript-eslint/parser",
   "plugins": [
     "react-hooks"
@@ -133,6 +136,7 @@
         ]
       }
     ],
+    "react/react-in-jsx-scope": "off",
     "react/jsx-curly-spacing": [
       "error",
       "always",
