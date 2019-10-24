@@ -2,8 +2,14 @@
   "env": {
     "node": true
   },
-  "extends": "airbnb-typescript/base",
+  "extends": [
+    "airbnb-typescript/base",
+    "plugin:putout/recommended"
+  ],
   "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "putout"
+  ],
   "rules": {
     "no-var": "error",
     "indent": [
@@ -114,12 +120,8 @@
     "import/newline-after-import": "off",
     "@typescript-eslint/semi": "off",
     "@typescript-eslint/prefer-interface": "off",
-    "@typescript-eslint/explicit-function-return-type": [
-      "error",
-      {
-        "allowExpressions": true,
-        "allowTypedFunctionExpressions": true
-      }
-    ]
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "putout/putout": "off",
+    "putout/destructuring-as-function-argument": "off"
   }
 }

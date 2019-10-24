@@ -2,12 +2,16 @@
   "env": {
     "browser": true
   },
-  "extends": "airbnb-typescript",
+  "extends": [
+    "airbnb-typescript",
+    "plugin:putout/recommended"
+  ],
   "globals": {
     "React": "writable"
   },
   "parser": "@typescript-eslint/parser",
   "plugins": [
+    "putout",
     "react-hooks"
   ],
   "rules": {
@@ -162,14 +166,11 @@
     ],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
+    "react/jsx-props-no-spreading": "off",
     "@typescript-eslint/semi": "off",
     "@typescript-eslint/prefer-interface": "off",
-    "@typescript-eslint/explicit-function-return-type": [
-      "error",
-      {
-        "allowExpressions": true,
-        "allowTypedFunctionExpressions": true
-      }
-    ]
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "putout/putout": "off",
+    "putout/destructuring-as-function-argument": "off"
   }
 }
