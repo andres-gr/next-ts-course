@@ -1,0 +1,6 @@
+{
+  "hooks": {
+    "pre-commit": "yarn eslint --ext .js,.jsx,.ts,.tsx frontend backend/src/",
+    "pre-push": "yarn eslint --ext .js,.jsx,.ts,.tsx frontend backend/src/"
+  }
+}
