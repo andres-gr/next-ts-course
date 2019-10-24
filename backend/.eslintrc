@@ -1,0 +1,125 @@
+{
+  "env": {
+    "node": true
+  },
+  "extends": "airbnb-typescript/base",
+  "parser": "@typescript-eslint/parser",
+  "rules": {
+    "no-var": "error",
+    "indent": [
+      "error",
+      2,
+      {
+        "SwitchCase": 1
+      }
+    ],
+    "semi": [
+      "error",
+      "never"
+    ],
+    "key-spacing": [
+      "error",
+      {
+        "align": {
+          "beforeColon": true,
+          "afterColon": true,
+          "on": "colon",
+          "mode": "minimum"
+        },
+        "singleLine": {
+          "beforeColon": false,
+          "afterColon": true
+        },
+        "multiLine": {
+          "beforeColon": false,
+          "afterColon": true,
+          "mode": "minimum"
+        }
+      }
+    ],
+    "no-confusing-arrow": [
+      "error",
+      {
+        "allowParens": true
+      }
+    ],
+    "comma-dangle": [
+      "error",
+      "only-multiline"
+    ],
+    "no-extra-parens": [
+      "error",
+      "all",
+      {
+        "enforceForArrowConditionals": false,
+        "nestedBinaryExpressions": false,
+        "ignoreJSX": "multi-line"
+      }
+    ],
+    "arrow-parens": [
+      "error",
+      "as-needed",
+      {
+        "requireForBlockBody": false
+      }
+    ],
+    "no-nested-ternary": "off",
+    "space-before-function-paren": [
+      "error",
+      "always"
+    ],
+    "no-underscore-dangle": "off",
+    "max-len": "off",
+    "one-var": "off",
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        "max": 1,
+        "maxBOF": 0,
+        "maxEOF": 1
+      }
+    ],
+    "object-shorthand": [
+      "error",
+      "always",
+      {
+        "avoidQuotes": false,
+        "avoidExplicitReturnArrows": false
+      }
+    ],
+    "func-names": [
+      "error",
+      "as-needed"
+    ],
+    "object-curly-newline": [
+      "error",
+      {
+        "multiline": true,
+        "consistent": true
+      }
+    ],
+    "default-case": "off",
+    "valid-typeof": [
+      "error",
+      {
+        "requireStringLiterals": false
+      }
+    ],
+    "no-param-reassign": [
+      "error",
+      {
+        "props": false
+      }
+    ],
+    "import/newline-after-import": "off",
+    "@typescript-eslint/semi": "off",
+    "@typescript-eslint/prefer-interface": "off",
+    "@typescript-eslint/explicit-function-return-type": [
+      "error",
+      {
+        "allowExpressions": true,
+        "allowTypedFunctionExpressions": true
+      }
+    ]
+  }
+}

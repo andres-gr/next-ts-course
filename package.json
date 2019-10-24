@@ -1,0 +1,29 @@
+{
+  "name": "next-ts",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Testing NextJS with TypeScript",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "back:start": "yarn workspace backend nodemon -e js,graphql,ts -x babel-node src/index.ts",
+    "back:dev": "yarn workspace backend nodemon -e js,graphql,ts -x babel-node --inspect src/index.ts",
+    "back:test": "yarn workspace backend jest",
+    "back:deploy": "yarn workspace backend prisma deploy --env-file variables.env",
+    "front:dev": "yarn workspace frontend next -p 7777",
+    "front:build": "yarn workspace frontend next build",
+    "front:start": "yarn workspace frontend next start",
+    "front:test": "yarn workspace frontend NODE_ENV=test jest --watch",
+    "front:test-win": "yarn workspace frontend SET NODE_ENV=test&& jest --watch",
+    "front:heroku-postbuild": "yarn workspace frontend next build",
+    "dev": "run-p back:dev front:dev"
+  },
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "devDependencies": {
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.0"
+  }
+}
