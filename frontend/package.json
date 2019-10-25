@@ -73,33 +73,26 @@
     }
   },
   "babel": {
+    "presets": [
+      "next/babel"
+    ],
+    "plugins": [
+      [
+        "module-resolver",
+        {
+          "alias": {
+            "components": "./components/"
+          }
+        }
+      ],
+      [
+        "emotion",
+        {
+          "sourceMap": true
+        }
+      ]
+    ],
     "env": {
-      "development": {
-        "presets": [
-          "next/babel"
-        ],
-        "plugins": [
-          [
-            "emotion",
-            {
-              "sourceMap": true
-            }
-          ]
-        ]
-      },
-      "production": {
-        "presets": [
-          "next/babel"
-        ],
-        "plugins": [
-          [
-            "emotion",
-            {
-              "sourceMap": true
-            }
-          ]
-        ]
-      },
       "test": {
         "presets": [
           [
@@ -108,14 +101,6 @@
               "preset-env": {
                 "modules": "commonjs"
               }
-            }
-          ]
-        ],
-        "plugins": [
-          [
-            "emotion",
-            {
-              "sourceMap": true
             }
           ]
         ]
