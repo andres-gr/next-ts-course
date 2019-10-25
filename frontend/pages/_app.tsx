@@ -1,4 +1,5 @@
 import App from 'next/app'
+import Page from 'components/Page'
 
 class MyApp extends App {
   render () {
@@ -7,10 +8,9 @@ class MyApp extends App {
       pageProps
     } = this.props
     return (
-      <>
-        <span>Cosa</span>
+      <Page>
         <Component { ...pageProps } />
-      </>
+      </Page>
     )
   }
 }

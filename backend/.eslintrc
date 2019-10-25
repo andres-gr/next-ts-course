@@ -8,6 +8,7 @@
   ],
   "parser": "@typescript-eslint/parser",
   "plugins": [
+    "import",
     "putout"
   ],
   "rules": {
@@ -123,5 +124,13 @@
     "@typescript-eslint/explicit-function-return-type": "off",
     "putout/putout": "off",
     "putout/destructuring-as-function-argument": "off"
+  },
+  "settings": {
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true,
+        "directory": "./backend/tsconfig.json"
+      }
+    }
   }
 }

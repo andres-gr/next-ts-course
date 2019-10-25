@@ -48,6 +48,7 @@
     "enzyme-to-json": "^3.4.3",
     "eslint": "6.5.1",
     "eslint-config-airbnb-typescript": "5.1.0",
+    "eslint-import-resolver-typescript": "^2.0.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-putout": "^2.0.1",

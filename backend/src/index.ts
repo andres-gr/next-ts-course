@@ -1,1 +1,3 @@
-console.log('Hello')
+import cosa from 'utils/stuff'
+
+console.log(cosa)
