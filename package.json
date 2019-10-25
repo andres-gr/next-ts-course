@@ -6,8 +6,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "back:start": "yarn workspace backend nodemon -e js,graphql,ts -x babel-node src/index.ts",
-    "back:dev": "yarn workspace backend nodemon -e js,graphql,ts -x babel-node --inspect src/index.ts",
+    "back:start": "yarn workspace backend nodemon -e js,graphql,ts -x babel-node src/index.ts --extensions .ts",
+    "back:dev": "yarn workspace backend nodemon -e js,graphql,ts -x babel-node --inspect src/index.ts --extensions .ts",
     "back:test": "yarn workspace backend jest",
     "back:deploy": "yarn workspace backend prisma deploy --env-file variables.env",
     "front:dev": "yarn workspace frontend next -p 7777",

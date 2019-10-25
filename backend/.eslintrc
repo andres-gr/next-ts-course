@@ -9,7 +9,8 @@
   "parser": "@typescript-eslint/parser",
   "plugins": [
     "import",
-    "putout"
+    "putout",
+    "module-resolver"
   ],
   "rules": {
     "no-var": "error",
@@ -123,7 +124,18 @@
     "@typescript-eslint/prefer-interface": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "putout/putout": "off",
-    "putout/destructuring-as-function-argument": "off"
+    "putout/destructuring-as-function-argument": "off",
+    "module-resolver/use-alias": [
+      "error",
+      {
+        "extensions": [
+          ".jsx",
+          ".ts",
+          ".tsx"
+        ],
+        "projectRoot": "./backend/src/"
+      }
+    ]
   },
   "settings": {
     "import/resolver": {
