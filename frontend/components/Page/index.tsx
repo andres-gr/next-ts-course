@@ -1,14 +1,31 @@
 import { FC } from 'react'
 import PropTypes from 'prop-types'
+import { ThemeProvider } from 'emotion-theming'
 import Meta from 'components/Meta'
 import Header from 'components/Header'
+import styled, { theme } from '@theme'
+
+const StyledPage = styled.div`
+  background: white;
+  color: ${props => props.theme.black};
+`
+
+const Inner = styled.div`
+  margin: 0 auto;
+  max-width: ${props => props.theme.maxWidth};
+  padding: 2rem;
+`
 
 const Page: FC = ({ children }) => (
-  <>
-    <Meta />
-    <Header />
-    { children }
-  </>
+  <ThemeProvider theme={ theme }>
+    <StyledPage>
+      <Meta />
+      <Header />
+      <Inner>
+        { children }
+      </Inner>
+    </StyledPage>
+  </ThemeProvider>
 )
 
 Page.propTypes = {

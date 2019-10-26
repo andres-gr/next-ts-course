@@ -14,6 +14,7 @@
     "import",
     "putout",
     "module-resolver",
+    "emotion",
     "react-hooks"
   ],
   "rules": {
@@ -183,6 +184,11 @@
         ],
         "projectRoot": "./frontend/"
       }
+    ],
+    "emotion/jsx-import": "off",
+    "emotion/syntax-preference": [
+      "error",
+      "string"
     ]
   },
   "settings": {
