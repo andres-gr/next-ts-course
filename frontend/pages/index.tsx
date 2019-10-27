@@ -1,9 +1,5 @@
 import { NextPage } from 'next'
 
-const Index: NextPage = () => (
-  <div>
-    <p>Home page.</p>
-  </div>
-)
+const Index: NextPage = () => <p>Home page.</p>
 
 export default Index

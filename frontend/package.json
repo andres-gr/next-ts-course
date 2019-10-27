@@ -40,6 +40,7 @@
   },
   "devDependencies": {
     "@emotion/babel-preset-css-prop": "^10.0.22",
+    "@types/nprogress": "^0.2.0",
     "@types/ramda": "^0.26.33",
     "@types/react": "^16.9.9",
     "@types/react-dom": "^16.9.2",
@@ -92,6 +93,7 @@
         {
           "alias": {
             "components": "./components/",
+            "styles": "./components/styles/",
             "@theme": "./components/styles/theme/index.tsx"
           }
         }

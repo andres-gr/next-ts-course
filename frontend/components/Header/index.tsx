@@ -1,7 +1,21 @@
 import { FC } from 'react'
 import Link from 'next/link'
+import Router from 'next/router'
+import NProgress from 'nprogress'
 import Nav from 'components/Nav'
 import styled from '@theme'
+
+Router.events.on('routeChangeStart', () => {
+  NProgress.start()
+})
+
+Router.events.on('routeChangeComplete', () => {
+  NProgress.done()
+})
+
+Router.events.on('routeChangeError', () => {
+  NProgress.done()
+})
 
 const Logo = styled.h1`
   font-size: 4rem;

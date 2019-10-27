@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import PropTypes from 'prop-types'
 import { ThemeProvider } from 'emotion-theming'
+import GlobalStyles from 'styles/global'
 import Meta from 'components/Meta'
 import Header from 'components/Header'
 import styled, { theme } from '@theme'
@@ -18,6 +19,7 @@ const Inner = styled.div`
 
 const Page: FC = ({ children }) => (
   <ThemeProvider theme={ theme }>
+    <GlobalStyles />
     <StyledPage>
       <Meta />
       <Header />

@@ -23,6 +23,9 @@
       "components/*": [
         "components/*"
       ],
+      "styles/*": [
+        "components/styles/*"
+      ],
       "@theme": [
         "components/styles/theme/index.tsx"
       ]
