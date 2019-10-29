@@ -6,8 +6,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "back:start": "yarn workspace backend nodemon -e js,graphql,ts -x babel-node src/index.ts --extensions .ts",
-    "back:dev": "yarn workspace backend nodemon -e js,graphql,ts -x babel-node --inspect src/index.ts --extensions .ts",
+    "back:start": "yarn workspace backend nodemon -e ts,graphqls -x babel-node src/index.ts --extensions .ts",
+    "back:dev": "yarn workspace backend nodemon -e ts,graphqls -x babel-node --inspect src/index.ts --extensions .ts",
     "back:test": "yarn workspace backend jest",
     "back:deploy": "yarn workspace backend prisma deploy --env-file variables.env",
     "front:dev": "yarn workspace frontend next -p 7777",
@@ -18,13 +18,21 @@
     "front:heroku-postbuild": "yarn workspace frontend next build",
     "dev": "run-p back:dev front:dev"
   },
-  "workspaces": [
-    "backend",
-    "frontend"
-  ],
+  "workspaces": {
+    "packages": [
+      "backend",
+      "frontend"
+    ]
+  },
   "devDependencies": {
     "husky": "^3.0.9",
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.0"
+  },
+  "resolutions": {
+    "graphql-cli/**/graphql": "14.5.8",
+    "graphql-yoga/**/graphql": "14.5.8",
+    "prisma-binding/**/graphql": "14.5.8",
+    "prisma/**/graphql": "14.5.8"
   }
 }

@@ -9,8 +9,15 @@
     "outDir": "dist",
     "baseUrl": ".",
     "paths": {
-      "utils/*": ["src/utils/*"]
-    }
+      "utils/*": [
+        "src/utils/*"
+      ]
+    },
+    "plugins": [
+      {
+        "name": "@divyenduz/ts-graphql-plugin"
+      }
+    ]
   },
   "include": [
     "src/**/*"

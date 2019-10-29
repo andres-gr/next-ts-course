@@ -1,6 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
+  "private": true,
   "description": "the backend of sick fits",
   "dependencies": {
     "@babel/core": "^7.6.4",
@@ -22,14 +23,14 @@
   "devDependencies": {
     "@babel/preset-env": "^7.6.3",
     "@babel/preset-typescript": "7.6.0",
-    "@types/dotenv": "^6.1.1",
-    "@types/node": "^12.11.5",
+    "@divyenduz/ts-graphql-plugin": "^0.1.0",
+    "@types/node": "^12.11.7",
     "@types/ramda": "^0.26.33",
-    "@typescript-eslint/eslint-plugin": "2.5.0",
-    "@typescript-eslint/parser": "^2.5.0",
+    "@typescript-eslint/eslint-plugin": "2.6.0",
+    "@typescript-eslint/parser": "^2.6.0",
     "babel-plugin-module-resolver": "^3.2.0",
-    "eslint": "6.5.1",
-    "eslint-config-airbnb-typescript": "5.1.0",
+    "eslint": "6.6.0",
+    "eslint-config-airbnb-typescript": "6.0.0",
     "eslint-import-resolver-typescript": "^2.0.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-module-resolver": "^0.15.0",
@@ -37,6 +38,12 @@
     "graphql-cli": "^3.0.14",
     "nodemon": "^1.19.4",
     "typescript": "^3.7.0-beta"
+  },
+  "workspaces": {
+    "nohoist": [
+      "graphql",
+      "graphql/**"
+    ]
   },
   "license": "MIT",
   "repository": {
@@ -57,11 +64,5 @@
         }
       ]
     ]
-  },
-  "resolutions": {
-    "prisma/**/graphql": "^14.5.8",
-    "prisma-binding/**/graphql": "^14.5.8",
-    "graphql-yoga/**/graphql": "^14.5.8",
-    "graphql-cli/**/graphql": "^14.5.8"
   }
 }
