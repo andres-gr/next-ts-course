@@ -1,0 +1,22 @@
+overwrite: true
+schema: ${env:APP_URL}
+documents:
+  - 'frontend/graphql/documents/**/*.graphql'
+  - 'frontend/graphql/generated/**/*.graphql'
+generates:
+  ./frontend/graphql/schema.graphql:
+    plugins:
+      - schema-ast
+    hooks:
+      afterOneFileWrite:
+        - yarn graphql generate-fragments-fix -p app-client -o frontend/graphql/generated -g graphql
+  ./frontend/graphql/generated/graphql.tsx:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-react-apollo
+    config:
+      skipTypename: true
+      withComponent: false
+      withHOC: false
+      withHooks: true

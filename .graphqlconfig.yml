@@ -1,0 +1,34 @@
+projects:
+  app:
+    schemaPath: backend/prisma/schema.graphql
+    includes: [
+      "backend/**/*.graphql",
+      "backend/**/*.gql"
+    ]
+    exclude: [
+      "backend/**/*seed*.graphql",
+      "backend/**/*seed*.gql"
+    ]
+    extensions:
+      endpoints:
+        default: ${env:APP_URL}
+  app-client:
+    schemaPath: frontend/graphql/schema.graphql
+    includes: [
+      "frontend/graphql/**/*.graphql",
+      "frontend/graphql/**/*.gql"
+    ]
+    extensions:
+      endpoints:
+        default: ${env:APP_URL}
+  prisma:
+    schemaPath: backend/prisma/generated/prisma.graphql
+    includes: [
+      "backend/**/*.graphql",
+      "backend/**/*.gql"
+    ]
+    extensions:
+      prisma: prisma/prisma.yml
+      generate-fragments:
+        output: prisma/generated/prisma.fragments.graphql
+        generator: graphql
