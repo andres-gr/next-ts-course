@@ -1,3 +1,16 @@
-import cosa from 'utils/stuff'
+import 'Startup/dotenv'
+import create from './server'
 
-console.log(cosa)
+const server = create()
+
+server.start(
+  {
+    cors: {
+      credentials : true,
+      origin      : process.env.CLIENT_URL
+    }
+  },
+  ({ port }) => {
+    console.log(`Server is running on port: ${port}.`)
+  }
+)

@@ -1,3 +1,4 @@
 node_modules
 prisma-client
 *config*
+**/generated/**/*

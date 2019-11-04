@@ -9,15 +9,19 @@
     "outDir": "dist",
     "baseUrl": ".",
     "paths": {
-      "utils/*": [
+      "Utils/*": [
         "src/utils/*"
+      ],
+      "Prisma/*": [
+        "src/prisma/*"
+      ],
+      "Resolvers/*": [
+        "src/resolvers/*"
+      ],
+      "Startup/*": [
+        "src/startup/*"
       ]
-    },
-    "plugins": [
-      {
-        "name": "@divyenduz/ts-graphql-plugin"
-      }
-    ]
+    }
   },
   "include": [
     "src/**/*"

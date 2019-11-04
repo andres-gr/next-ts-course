@@ -57,7 +57,10 @@
         "module-resolver",
         {
           "alias": {
-            "utils": "./src/utils/"
+            "Utils": "./src/utils/",
+            "Prisma": "./src/prisma/",
+            "Resolvers": "./src/resolvers/",
+            "Startup": "./src/startup/"
           }
         }
       ]
