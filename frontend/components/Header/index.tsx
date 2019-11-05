@@ -2,8 +2,8 @@ import { FC } from 'react'
 import Link from 'next/link'
 import Router from 'next/router'
 import NProgress from 'nprogress'
-import Nav from 'components/Nav'
-import styled from '@theme'
+import Nav from 'Components/Nav'
+import styled from 'Styles/theme'
 
 Router.events.on('routeChangeStart', () => {
   NProgress.start()

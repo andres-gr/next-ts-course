@@ -20,14 +20,11 @@
     "sourceMap": true,
     "strict": false,
     "paths": {
-      "components/*": [
+      "Components/*": [
         "components/*"
       ],
-      "styles/*": [
+      "Styles/*": [
         "components/styles/*"
-      ],
-      "@theme": [
-        "components/styles/theme/index.tsx"
       ]
     }
   },

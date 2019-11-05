@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import Link from 'next/link'
-import NavStyles from 'styles/NavStyles'
+import NavStyles from 'Styles/NavStyles'
 
 const Nav: FC = () => (
   <NavStyles>

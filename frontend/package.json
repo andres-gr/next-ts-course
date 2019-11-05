@@ -61,7 +61,7 @@
     "graphql-tools": "^4.0.6",
     "jest": "^25.0.0",
     "jest-transform-graphql": "^2.1.0",
-    "typescript": "^3.7.0-beta"
+    "typescript": "^3.7.1-rc"
   },
   "jest": {
     "setupTestFrameworkScriptFile": "<rootDir>/jest.setup.js",
@@ -90,9 +90,8 @@
         "module-resolver",
         {
           "alias": {
-            "components": "./components/",
-            "styles": "./components/styles/",
-            "@theme": "./components/styles/theme/index.tsx"
+            "Components": "./components/",
+            "Styles": "./components/styles/"
           }
         }
       ]

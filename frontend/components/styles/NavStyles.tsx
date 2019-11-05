@@ -1,4 +1,4 @@
-import styled from '@theme'
+import styled from 'Styles/theme'
 
 const NavStyles = styled.ul`
   margin: 0;

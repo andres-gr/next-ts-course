@@ -3,10 +3,12 @@ datamodel: datamodel.graphql
 generate:
   - generator: typescript-client
     output: ./generated/prisma-client/
-  - generator: graphql-schema
-    output: ./generated/prisma.graphql
+  # - generator: graphql-schema
+  #   output: ./generated/prisma.graphql
 hooks:
   post-deploy:
+    - rimraf generated
     - prisma generate
-    - yarn graphql get-schema -p prisma
-    - yarn graphql generate-fragments-fix -p prisma
+    - graphql get-schema -p prisma
+    - graphql generate-fragments-fix -p prisma
+    - ../../../postinstall

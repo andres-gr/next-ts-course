@@ -1,7 +1,66 @@
-# source: https://eu1.prisma.sh/andres-garcia-rivera-9f50f8/sick-fits/dev
-# timestamp: Mon Nov 04 2019 23:41:34 GMT-0600 (Central Standard Time)
+import { GraphQLResolveInfo, GraphQLSchema } from 'graphql'
+import { IResolvers } from 'graphql-tools/dist/Interfaces'
+import { Options } from 'graphql-binding'
+import { makePrismaBindingClass, BasePrismaOptions } from 'prisma-binding'
 
-type AggregateItem {
+export interface Query {
+    users: <T = Array<User | null>>(args: { where?: UserWhereInput | null, orderBy?: UserOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    items: <T = Array<Item | null>>(args: { where?: ItemWhereInput | null, orderBy?: ItemOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    user: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    item: <T = Item | null>(args: { where: ItemWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    usersConnection: <T = UserConnection>(args: { where?: UserWhereInput | null, orderBy?: UserOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    itemsConnection: <T = ItemConnection>(args: { where?: ItemWhereInput | null, orderBy?: ItemOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    node: <T = Node | null>(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> 
+  }
+
+export interface Mutation {
+    createUser: <T = User>(args: { data: UserCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createItem: <T = Item>(args: { data: ItemCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateUser: <T = User | null>(args: { data: UserUpdateInput, where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    updateItem: <T = Item | null>(args: { data: ItemUpdateInput, where: ItemWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    deleteUser: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    deleteItem: <T = Item | null>(args: { where: ItemWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    upsertUser: <T = User>(args: { where: UserWhereUniqueInput, create: UserCreateInput, update: UserUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertItem: <T = Item>(args: { where: ItemWhereUniqueInput, create: ItemCreateInput, update: ItemUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyUsers: <T = BatchPayload>(args: { data: UserUpdateManyMutationInput, where?: UserWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyItems: <T = BatchPayload>(args: { data: ItemUpdateManyMutationInput, where?: ItemWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteManyUsers: <T = BatchPayload>(args: { where?: UserWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteManyItems: <T = BatchPayload>(args: { where?: ItemWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> 
+  }
+
+export interface Subscription {
+    user: <T = UserSubscriptionPayload | null>(args: { where?: UserSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
+    item: <T = ItemSubscriptionPayload | null>(args: { where?: ItemSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> 
+  }
+
+export interface Exists {
+  User: (where?: UserWhereInput) => Promise<boolean>
+  Item: (where?: ItemWhereInput) => Promise<boolean>
+}
+
+export interface Prisma {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+  exists: Exists
+  request: <T = any>(query: string, variables?: {[key: string]: any}) => Promise<T>
+  delegate(operation: 'query' | 'mutation', fieldName: string, args: {
+    [key: string]: any;
+}, infoOrQuery?: GraphQLResolveInfo | string, options?: Options): Promise<any>;
+delegateSubscription(fieldName: string, args?: {
+    [key: string]: any;
+}, infoOrQuery?: GraphQLResolveInfo | string, options?: Options): Promise<AsyncIterator<any>>;
+getAbstractResolvers(filterSchema?: GraphQLSchema | string): IResolvers;
+}
+
+export interface BindingConstructor<T> {
+  new(options: BasePrismaOptions): T
+}
+/**
+ * Type Defs
+*/
+
+const typeDefs = `type AggregateItem {
   count: Int!
 }
 
@@ -366,7 +425,7 @@ input ItemWhereUniqueInput {
 }
 
 """
-The `Long` scalar type represents non-fractional signed whole numeric values.
+The \`Long\` scalar type represents non-fractional signed whole numeric values.
 Long can represent values between -(2^63) and 2^63 - 1.
 """
 scalar Long
@@ -613,301 +672,356 @@ input UserWhereInput {
 input UserWhereUniqueInput {
   id: ID
 }
-# THIS FILE HAS BEEN AUTO-GENERATED BY "graphql-cli-generate-fragments"
-# DO NOT EDIT THIS FILE DIRECTLY
+`
 
-# Standard Fragments
-# Nested fragments will spread one layer deep
+export const Prisma = makePrismaBindingClass<BindingConstructor<Prisma>>({typeDefs})
 
+/**
+ * Types
+*/
 
-fragment ItemEdge on ItemEdge {
-  node {
-    ...ItemNoNesting
-  }
-  cursor
+export type ItemOrderByInput =   'id_ASC' |
+  'id_DESC' |
+  'title_ASC' |
+  'title_DESC' |
+  'description_ASC' |
+  'description_DESC' |
+  'image_ASC' |
+  'image_DESC' |
+  'largeImage_ASC' |
+  'largeImage_DESC' |
+  'price_ASC' |
+  'price_DESC'
+
+export type MutationType =   'CREATED' |
+  'UPDATED' |
+  'DELETED'
+
+export type UserOrderByInput =   'id_ASC' |
+  'id_DESC' |
+  'name_ASC' |
+  'name_DESC'
+
+export interface ItemCreateInput {
+  id?: ID_Input | null
+  title: String
+  description: String
+  image?: String | null
+  largeImage?: String | null
+  price: Int
 }
 
-fragment ItemPreviousValues on ItemPreviousValues {
-  id
-  title
-  description
-  image
-  largeImage
-  price
+export interface ItemSubscriptionWhereInput {
+  AND?: ItemSubscriptionWhereInput[] | ItemSubscriptionWhereInput | null
+  OR?: ItemSubscriptionWhereInput[] | ItemSubscriptionWhereInput | null
+  NOT?: ItemSubscriptionWhereInput[] | ItemSubscriptionWhereInput | null
+  mutation_in?: MutationType[] | MutationType | null
+  updatedFields_contains?: String | null
+  updatedFields_contains_every?: String[] | String | null
+  updatedFields_contains_some?: String[] | String | null
+  node?: ItemWhereInput | null
 }
 
-fragment AggregateItem on AggregateItem {
-  count
+export interface ItemUpdateInput {
+  title?: String | null
+  description?: String | null
+  image?: String | null
+  largeImage?: String | null
+  price?: Int | null
 }
 
-fragment User on User {
-  id
-  name
+export interface ItemUpdateManyMutationInput {
+  title?: String | null
+  description?: String | null
+  image?: String | null
+  largeImage?: String | null
+  price?: Int | null
 }
 
-fragment UserConnection on UserConnection {
-  pageInfo {
-    ...PageInfoNoNesting
-  }
-  edges {
-    ...UserEdgeNoNesting
-  }
-  aggregate {
-    ...AggregateUserNoNesting
-  }
+export interface ItemWhereInput {
+  AND?: ItemWhereInput[] | ItemWhereInput | null
+  OR?: ItemWhereInput[] | ItemWhereInput | null
+  NOT?: ItemWhereInput[] | ItemWhereInput | null
+  id?: ID_Input | null
+  id_not?: ID_Input | null
+  id_in?: ID_Output[] | ID_Output | null
+  id_not_in?: ID_Output[] | ID_Output | null
+  id_lt?: ID_Input | null
+  id_lte?: ID_Input | null
+  id_gt?: ID_Input | null
+  id_gte?: ID_Input | null
+  id_contains?: ID_Input | null
+  id_not_contains?: ID_Input | null
+  id_starts_with?: ID_Input | null
+  id_not_starts_with?: ID_Input | null
+  id_ends_with?: ID_Input | null
+  id_not_ends_with?: ID_Input | null
+  title?: String | null
+  title_not?: String | null
+  title_in?: String[] | String | null
+  title_not_in?: String[] | String | null
+  title_lt?: String | null
+  title_lte?: String | null
+  title_gt?: String | null
+  title_gte?: String | null
+  title_contains?: String | null
+  title_not_contains?: String | null
+  title_starts_with?: String | null
+  title_not_starts_with?: String | null
+  title_ends_with?: String | null
+  title_not_ends_with?: String | null
+  description?: String | null
+  description_not?: String | null
+  description_in?: String[] | String | null
+  description_not_in?: String[] | String | null
+  description_lt?: String | null
+  description_lte?: String | null
+  description_gt?: String | null
+  description_gte?: String | null
+  description_contains?: String | null
+  description_not_contains?: String | null
+  description_starts_with?: String | null
+  description_not_starts_with?: String | null
+  description_ends_with?: String | null
+  description_not_ends_with?: String | null
+  image?: String | null
+  image_not?: String | null
+  image_in?: String[] | String | null
+  image_not_in?: String[] | String | null
+  image_lt?: String | null
+  image_lte?: String | null
+  image_gt?: String | null
+  image_gte?: String | null
+  image_contains?: String | null
+  image_not_contains?: String | null
+  image_starts_with?: String | null
+  image_not_starts_with?: String | null
+  image_ends_with?: String | null
+  image_not_ends_with?: String | null
+  largeImage?: String | null
+  largeImage_not?: String | null
+  largeImage_in?: String[] | String | null
+  largeImage_not_in?: String[] | String | null
+  largeImage_lt?: String | null
+  largeImage_lte?: String | null
+  largeImage_gt?: String | null
+  largeImage_gte?: String | null
+  largeImage_contains?: String | null
+  largeImage_not_contains?: String | null
+  largeImage_starts_with?: String | null
+  largeImage_not_starts_with?: String | null
+  largeImage_ends_with?: String | null
+  largeImage_not_ends_with?: String | null
+  price?: Int | null
+  price_not?: Int | null
+  price_in?: Int[] | Int | null
+  price_not_in?: Int[] | Int | null
+  price_lt?: Int | null
+  price_lte?: Int | null
+  price_gt?: Int | null
+  price_gte?: Int | null
 }
 
-fragment ItemSubscriptionPayload on ItemSubscriptionPayload {
-  mutation
-  node {
-    ...ItemNoNesting
-  }
-  updatedFields
-  previousValues {
-    ...ItemPreviousValuesNoNesting
-  }
+export interface ItemWhereUniqueInput {
+  id?: ID_Input | null
 }
 
-fragment UserPreviousValues on UserPreviousValues {
-  id
-  name
+export interface UserCreateInput {
+  id?: ID_Input | null
+  name: String
 }
 
-fragment UserSubscriptionPayload on UserSubscriptionPayload {
-  mutation
-  node {
-    ...UserNoNesting
-  }
-  updatedFields
-  previousValues {
-    ...UserPreviousValuesNoNesting
-  }
+export interface UserSubscriptionWhereInput {
+  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput | null
+  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput | null
+  NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput | null
+  mutation_in?: MutationType[] | MutationType | null
+  updatedFields_contains?: String | null
+  updatedFields_contains_every?: String[] | String | null
+  updatedFields_contains_some?: String[] | String | null
+  node?: UserWhereInput | null
 }
 
-fragment BatchPayload on BatchPayload {
-  count
+export interface UserUpdateInput {
+  name?: String | null
 }
 
-fragment PageInfo on PageInfo {
-  hasNextPage
-  hasPreviousPage
-  startCursor
-  endCursor
+export interface UserUpdateManyMutationInput {
+  name?: String | null
 }
 
-fragment Item on Item {
-  id
-  title
-  description
-  image
-  largeImage
-  price
+export interface UserWhereInput {
+  AND?: UserWhereInput[] | UserWhereInput | null
+  OR?: UserWhereInput[] | UserWhereInput | null
+  NOT?: UserWhereInput[] | UserWhereInput | null
+  id?: ID_Input | null
+  id_not?: ID_Input | null
+  id_in?: ID_Output[] | ID_Output | null
+  id_not_in?: ID_Output[] | ID_Output | null
+  id_lt?: ID_Input | null
+  id_lte?: ID_Input | null
+  id_gt?: ID_Input | null
+  id_gte?: ID_Input | null
+  id_contains?: ID_Input | null
+  id_not_contains?: ID_Input | null
+  id_starts_with?: ID_Input | null
+  id_not_starts_with?: ID_Input | null
+  id_ends_with?: ID_Input | null
+  id_not_ends_with?: ID_Input | null
+  name?: String | null
+  name_not?: String | null
+  name_in?: String[] | String | null
+  name_not_in?: String[] | String | null
+  name_lt?: String | null
+  name_lte?: String | null
+  name_gt?: String | null
+  name_gte?: String | null
+  name_contains?: String | null
+  name_not_contains?: String | null
+  name_starts_with?: String | null
+  name_not_starts_with?: String | null
+  name_ends_with?: String | null
+  name_not_ends_with?: String | null
 }
 
-fragment ItemConnection on ItemConnection {
-  pageInfo {
-    ...PageInfoNoNesting
-  }
-  edges {
-    ...ItemEdgeNoNesting
-  }
-  aggregate {
-    ...AggregateItemNoNesting
-  }
+export interface UserWhereUniqueInput {
+  id?: ID_Input | null
 }
 
-fragment AggregateUser on AggregateUser {
-  count
+/*
+ * An object with an ID
+
+ */
+export interface Node {
+  id: ID_Output
 }
 
-fragment UserEdge on UserEdge {
-  node {
-    ...UserNoNesting
-  }
-  cursor
+export interface AggregateItem {
+  count: Int
 }
 
-
-# No Relational objects
-# No nested fragments
-
-
-fragment ItemEdgeNoNesting on ItemEdge {
-  cursor
+export interface AggregateUser {
+  count: Int
 }
 
-fragment ItemPreviousValuesNoNesting on ItemPreviousValues {
-  id
-  title
-  description
-  image
-  largeImage
-  price
+export interface BatchPayload {
+  count: Long
 }
 
-fragment AggregateItemNoNesting on AggregateItem {
-  count
+export interface Item extends Node {
+  id: ID_Output
+  title: String
+  description: String
+  image?: String | null
+  largeImage?: String | null
+  price: Int
 }
 
-fragment UserNoNesting on User {
-  id
-  name
+/*
+ * A connection to a list of items.
+
+ */
+export interface ItemConnection {
+  pageInfo: PageInfo
+  edges: Array<ItemEdge | null>
+  aggregate: AggregateItem
 }
 
-fragment ItemSubscriptionPayloadNoNesting on ItemSubscriptionPayload {
-  mutation
-  updatedFields
+/*
+ * An edge in a connection.
+
+ */
+export interface ItemEdge {
+  node: Item
+  cursor: String
 }
 
-fragment UserPreviousValuesNoNesting on UserPreviousValues {
-  id
-  name
+export interface ItemPreviousValues {
+  id: ID_Output
+  title: String
+  description: String
+  image?: String | null
+  largeImage?: String | null
+  price: Int
 }
 
-fragment UserSubscriptionPayloadNoNesting on UserSubscriptionPayload {
-  mutation
-  updatedFields
+export interface ItemSubscriptionPayload {
+  mutation: MutationType
+  node?: Item | null
+  updatedFields?: Array<String> | null
+  previousValues?: ItemPreviousValues | null
 }
 
-fragment BatchPayloadNoNesting on BatchPayload {
-  count
+/*
+ * Information about pagination in a connection.
+
+ */
+export interface PageInfo {
+  hasNextPage: Boolean
+  hasPreviousPage: Boolean
+  startCursor?: String | null
+  endCursor?: String | null
 }
 
-fragment PageInfoNoNesting on PageInfo {
-  hasNextPage
-  hasPreviousPage
-  startCursor
-  endCursor
+export interface User extends Node {
+  id: ID_Output
+  name: String
 }
 
-fragment ItemNoNesting on Item {
-  id
-  title
-  description
-  image
-  largeImage
-  price
+/*
+ * A connection to a list of items.
+
+ */
+export interface UserConnection {
+  pageInfo: PageInfo
+  edges: Array<UserEdge | null>
+  aggregate: AggregateUser
 }
 
-fragment AggregateUserNoNesting on AggregateUser {
-  count
+/*
+ * An edge in a connection.
+
+ */
+export interface UserEdge {
+  node: User
+  cursor: String
 }
 
-fragment UserEdgeNoNesting on UserEdge {
-  cursor
+export interface UserPreviousValues {
+  id: ID_Output
+  name: String
 }
 
-
-# Deeply nested Fragments
-# Will include n nested fragments
-# If there is a recursive relation you will receive a
-# "Cannot spread fragment within itself" error when using
-
-
-fragment ItemEdgeDeepNesting on ItemEdge {
-  node {
-    ...ItemDeepNesting
-  }
-  cursor
+export interface UserSubscriptionPayload {
+  mutation: MutationType
+  node?: User | null
+  updatedFields?: Array<String> | null
+  previousValues?: UserPreviousValues | null
 }
 
-fragment ItemPreviousValuesDeepNesting on ItemPreviousValues {
-  id
-  title
-  description
-  image
-  largeImage
-  price
-}
+/*
+The `Boolean` scalar type represents `true` or `false`.
+*/
+export type Boolean = boolean
 
-fragment AggregateItemDeepNesting on AggregateItem {
-  count
-}
+/*
+The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
+*/
+export type ID_Input = string | number
+export type ID_Output = string
 
-fragment UserDeepNesting on User {
-  id
-  name
-}
+/*
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
+*/
+export type Int = number
 
-fragment UserConnectionDeepNesting on UserConnection {
-  pageInfo {
-    ...PageInfoDeepNesting
-  }
-  edges {
-    ...UserEdgeDeepNesting
-  }
-  aggregate {
-    ...AggregateUserDeepNesting
-  }
-}
+/*
+The `Long` scalar type represents non-fractional signed whole numeric values.
+Long can represent values between -(2^63) and 2^63 - 1.
+*/
+export type Long = string
 
-fragment ItemSubscriptionPayloadDeepNesting on ItemSubscriptionPayload {
-  mutation
-  node {
-    ...ItemDeepNesting
-  }
-  updatedFields
-  previousValues {
-    ...ItemPreviousValuesDeepNesting
-  }
-}
-
-fragment UserPreviousValuesDeepNesting on UserPreviousValues {
-  id
-  name
-}
-
-fragment UserSubscriptionPayloadDeepNesting on UserSubscriptionPayload {
-  mutation
-  node {
-    ...UserDeepNesting
-  }
-  updatedFields
-  previousValues {
-    ...UserPreviousValuesDeepNesting
-  }
-}
-
-fragment BatchPayloadDeepNesting on BatchPayload {
-  count
-}
-
-fragment PageInfoDeepNesting on PageInfo {
-  hasNextPage
-  hasPreviousPage
-  startCursor
-  endCursor
-}
-
-fragment ItemDeepNesting on Item {
-  id
-  title
-  description
-  image
-  largeImage
-  price
-}
-
-fragment ItemConnectionDeepNesting on ItemConnection {
-  pageInfo {
-    ...PageInfoDeepNesting
-  }
-  edges {
-    ...ItemEdgeDeepNesting
-  }
-  aggregate {
-    ...AggregateItemDeepNesting
-  }
-}
-
-fragment AggregateUserDeepNesting on AggregateUser {
-  count
-}
-
-fragment UserEdgeDeepNesting on UserEdge {
-  node {
-    ...UserDeepNesting
-  }
-  cursor
-}
-
+/*
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+*/
+export type String = string

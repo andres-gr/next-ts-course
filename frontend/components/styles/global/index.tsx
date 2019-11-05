@@ -1,9 +1,9 @@
 import { FC } from 'react'
 import {
   Global,
-  css
+  css,
 } from '@emotion/core'
-import { theme } from '@theme'
+import { theme } from 'Styles/theme'
 
 const globalStyles = css`
   @font-face {

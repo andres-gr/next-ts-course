@@ -1,5 +1,5 @@
 overwrite: true
-schema: ${env:APP_URL}
+schema: ${env:APP_URL}:${env:APP_PORT}
 documents:
   - 'frontend/graphql/documents/**/*.graphql'
   - 'frontend/graphql/generated/**/*.graphql'

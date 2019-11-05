@@ -35,7 +35,7 @@
     "eslint-plugin-module-resolver": "^0.15.0",
     "eslint-plugin-putout": "^2.0.1",
     "nodemon": "^1.19.4",
-    "typescript": "^3.7.0-beta"
+    "typescript": "^3.7.1-rc"
   },
   "workspaces": {
     "nohoist": [

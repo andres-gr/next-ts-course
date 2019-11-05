@@ -1,0 +1,6 @@
+{
+  "hooks": {
+    "pre-commit": "run-s lint:front lint:back",
+    "pre-push": "run-s lint:front lint:back"
+  }
+}

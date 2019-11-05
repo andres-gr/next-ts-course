@@ -1,10 +1,10 @@
 import { FC } from 'react'
 import PropTypes from 'prop-types'
 import { ThemeProvider } from 'emotion-theming'
-import GlobalStyles from 'styles/global'
-import Meta from 'components/Meta'
-import Header from 'components/Header'
-import styled, { theme } from '@theme'
+import GlobalStyles from 'Styles/global'
+import styled, { theme } from 'Styles/theme'
+import Meta from 'Components/Meta'
+import Header from 'Components/Header'
 
 const StyledPage = styled.div`
   background: white;
@@ -31,7 +31,7 @@ const Page: FC = ({ children }) => (
 )
 
 Page.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 }
 
 export default Page

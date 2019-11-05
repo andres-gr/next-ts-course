@@ -12,7 +12,7 @@ const create = () => new GraphQLServer({
   resolvers : {
     Query,
     Mutation,
-  },
+  } as any,
   resolverValidationOptions: {
     requireResolversForResolveType: false,
   },

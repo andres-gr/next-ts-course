@@ -1,11 +1,11 @@
 import App from 'next/app'
-import Page from 'components/Page'
+import Page from 'Components/Page'
 
 class MyApp extends App {
   render () {
     const {
       Component,
-      pageProps
+      pageProps,
     } = this.props
     return (
       <Page>
