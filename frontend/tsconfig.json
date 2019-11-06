@@ -23,6 +23,9 @@
       "Components/*": [
         "components/*"
       ],
+      "Lib/*": [
+        "lib/*"
+      ],
       "Styles/*": [
         "components/styles/*"
       ]

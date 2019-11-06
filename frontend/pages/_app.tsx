@@ -1,7 +1,16 @@
-import App from 'next/app'
+import App, { AppContext } from 'next/app'
 import Page from 'Components/Page'
 
 class MyApp extends App {
+  static async getInitialProps ({ Component, ctx }: AppContext) {
+    let pageProps: { query?: any }
+    if (Component.getInitialProps) {
+      pageProps = await Component.getInitialProps(ctx)
+    }
+    pageProps.query = ctx.query
+    return { pageProps }
+  }
+  
   render () {
     const {
       Component,

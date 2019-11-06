@@ -125,6 +125,7 @@
         "props": false
       }
     ],
+    "padding-line-between-statements": "off",
     "import/newline-after-import": "off",
     "jsx-a11y/anchor-is-valid": [
       "error",

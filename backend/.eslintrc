@@ -120,6 +120,7 @@
         "props": false
       }
     ],
+    "padding-line-between-statements": "off",
     "import/newline-after-import": "off",
     "@typescript-eslint/semi": "off",
     "@typescript-eslint/prefer-interface": "off",
