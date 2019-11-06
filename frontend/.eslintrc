@@ -4,16 +4,17 @@
   },
   "extends": [
     "airbnb-typescript",
-    "plugin:putout/recommended"
+    "plugin:putout/recommended",
+    "plugin:import/typescript"
   ],
   "globals": {
     "React": "writable"
   },
   "parser": "@typescript-eslint/parser",
   "plugins": [
+    "module-resolver",
     "import",
     "putout",
-    "module-resolver",
     "emotion",
     "react-hooks"
   ],
@@ -198,6 +199,9 @@
       ]
     },
     "import/resolver": {
+      "node": {
+        "paths": ["./"]
+      },
       "typescript": {
         "alwaysTryTypes": true,
         "directory": "./frontend/tsconfig.json"
