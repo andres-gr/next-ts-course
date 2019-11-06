@@ -12,15 +12,6 @@ projects:
     extensions:
       endpoints:
         default: ${env:APP_URL}:${env:APP_PORT}
-  # app-client:
-  #   schemaPath: ../../frontend/graphql/schema.graphql
-  #   includes: [
-  #     "**/graphql/**/*.graphql",
-  #     "**/graphql/**/*.gql"
-  #   ]
-  #   extensions:
-  #     endpoints:
-  #       default: ${env:APP_URL}:${env:APP_PORT}
   prisma:
     schemaPath: ./backend/src/prisma/generated/prisma.graphql
     includes: [

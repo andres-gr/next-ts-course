@@ -1,0 +1,43 @@
+scalar DateTime
+
+type Item implements Node {
+  id: ID!
+  title: String!
+  description: String!
+  image: String
+  largeImage: String
+  price: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input ItemCreateInput {
+  id: ID
+  title: String!
+  description: String!
+  image: String
+  largeImage: String
+  price: Int!
+}
+
+type Mutation {
+  createItem(data: ItemCreateInput!): Item!
+}
+
+"""An object with an ID"""
+interface Node {
+  """The id of the object."""
+  id: ID!
+}
+
+type Query {
+  items: [Item]!
+  users: [User]
+}
+
+type User implements Node {
+  id: ID!
+  name: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}

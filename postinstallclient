@@ -1,0 +1,4 @@
+#!/bin/bash
+
+graphql get-schema -p app-client --dotenv ../.env
+graphql generate-fragments-fix -p app-client -o ./graphql/generated -g graphql --dotenv ../.env
