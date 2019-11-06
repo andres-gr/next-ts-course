@@ -30,12 +30,12 @@
     ]
   },
   "devDependencies": {
-    "@graphql-codegen/add": "1.8.2",
-    "@graphql-codegen/cli": "1.8.2",
-    "@graphql-codegen/schema-ast": "1.8.2",
-    "@graphql-codegen/typescript": "1.8.2",
-    "@graphql-codegen/typescript-operations": "1.8.2",
-    "@graphql-codegen/typescript-react-apollo": "1.8.2",
+    "@graphql-codegen/add": "1.8.3",
+    "@graphql-codegen/cli": "1.8.3",
+    "@graphql-codegen/schema-ast": "1.8.3",
+    "@graphql-codegen/typescript": "1.8.3",
+    "@graphql-codegen/typescript-operations": "1.8.3",
+    "@graphql-codegen/typescript-react-apollo": "1.8.3",
     "graphql-cli": "^3.0.14",
     "graphql-cli-generate-fragments-fix": "^1.4.3",
     "graphqlgen": "^0.6.0-rc9",
