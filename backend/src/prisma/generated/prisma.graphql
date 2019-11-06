@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/andres-garcia-rivera-9f50f8/sick-fits/dev
-# timestamp: Mon Nov 04 2019 23:41:34 GMT-0600 (Central Standard Time)
+# timestamp: Tue Nov 05 2019 22:15:17 GMT-0600 (Central Standard Time)
 
 type AggregateItem {
   count: Int!
@@ -14,6 +14,8 @@ type BatchPayload {
   count: Long!
 }
 
+scalar DateTime
+
 type Item implements Node {
   id: ID!
   title: String!
@@ -21,6 +23,8 @@ type Item implements Node {
   image: String
   largeImage: String
   price: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 """A connection to a list of items."""
@@ -64,6 +68,10 @@ enum ItemOrderByInput {
   largeImage_DESC
   price_ASC
   price_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
 }
 
 type ItemPreviousValues {
@@ -73,6 +81,8 @@ type ItemPreviousValues {
   image: String
   largeImage: String
   price: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type ItemSubscriptionPayload {
@@ -359,6 +369,50 @@ input ItemWhereInput {
 
   """All values greater than or equal the given value."""
   price_gte: Int
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
 }
 
 input ItemWhereUniqueInput {
@@ -436,6 +490,8 @@ type Subscription {
 type User implements Node {
   id: ID!
   name: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 """A connection to a list of items."""
@@ -467,11 +523,17 @@ enum UserOrderByInput {
   id_DESC
   name_ASC
   name_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
 }
 
 type UserPreviousValues {
   id: ID!
   name: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type UserSubscriptionPayload {
@@ -608,6 +670,50 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
 }
 
 input UserWhereUniqueInput {
@@ -634,6 +740,8 @@ fragment ItemPreviousValues on ItemPreviousValues {
   image
   largeImage
   price
+  createdAt
+  updatedAt
 }
 
 fragment AggregateItem on AggregateItem {
@@ -643,6 +751,8 @@ fragment AggregateItem on AggregateItem {
 fragment User on User {
   id
   name
+  createdAt
+  updatedAt
 }
 
 fragment UserConnection on UserConnection {
@@ -671,6 +781,8 @@ fragment ItemSubscriptionPayload on ItemSubscriptionPayload {
 fragment UserPreviousValues on UserPreviousValues {
   id
   name
+  createdAt
+  updatedAt
 }
 
 fragment UserSubscriptionPayload on UserSubscriptionPayload {
@@ -702,6 +814,8 @@ fragment Item on Item {
   image
   largeImage
   price
+  createdAt
+  updatedAt
 }
 
 fragment ItemConnection on ItemConnection {
@@ -743,6 +857,8 @@ fragment ItemPreviousValuesNoNesting on ItemPreviousValues {
   image
   largeImage
   price
+  createdAt
+  updatedAt
 }
 
 fragment AggregateItemNoNesting on AggregateItem {
@@ -752,6 +868,8 @@ fragment AggregateItemNoNesting on AggregateItem {
 fragment UserNoNesting on User {
   id
   name
+  createdAt
+  updatedAt
 }
 
 fragment ItemSubscriptionPayloadNoNesting on ItemSubscriptionPayload {
@@ -762,6 +880,8 @@ fragment ItemSubscriptionPayloadNoNesting on ItemSubscriptionPayload {
 fragment UserPreviousValuesNoNesting on UserPreviousValues {
   id
   name
+  createdAt
+  updatedAt
 }
 
 fragment UserSubscriptionPayloadNoNesting on UserSubscriptionPayload {
@@ -787,6 +907,8 @@ fragment ItemNoNesting on Item {
   image
   largeImage
   price
+  createdAt
+  updatedAt
 }
 
 fragment AggregateUserNoNesting on AggregateUser {
@@ -818,6 +940,8 @@ fragment ItemPreviousValuesDeepNesting on ItemPreviousValues {
   image
   largeImage
   price
+  createdAt
+  updatedAt
 }
 
 fragment AggregateItemDeepNesting on AggregateItem {
@@ -827,6 +951,8 @@ fragment AggregateItemDeepNesting on AggregateItem {
 fragment UserDeepNesting on User {
   id
   name
+  createdAt
+  updatedAt
 }
 
 fragment UserConnectionDeepNesting on UserConnection {
@@ -855,6 +981,8 @@ fragment ItemSubscriptionPayloadDeepNesting on ItemSubscriptionPayload {
 fragment UserPreviousValuesDeepNesting on UserPreviousValues {
   id
   name
+  createdAt
+  updatedAt
 }
 
 fragment UserSubscriptionPayloadDeepNesting on UserSubscriptionPayload {
@@ -886,6 +1014,8 @@ fragment ItemDeepNesting on Item {
   image
   largeImage
   price
+  createdAt
+  updatedAt
 }
 
 fragment ItemConnectionDeepNesting on ItemConnection {

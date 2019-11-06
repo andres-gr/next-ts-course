@@ -86,7 +86,9 @@ export namespace ItemResolvers {
     image: (parent: Item) => (parent.image === undefined ? null : parent.image),
     largeImage: (parent: Item) =>
       parent.largeImage === undefined ? null : parent.largeImage,
-    price: (parent: Item) => parent.price
+    price: (parent: Item) => parent.price,
+    createdAt: (parent: Item) => parent.createdAt,
+    updatedAt: (parent: Item) => parent.updatedAt
   };
 
   export type IdResolver =
@@ -191,6 +193,40 @@ export namespace ItemResolvers {
         ) => number | Promise<number>;
       };
 
+  export type CreatedAtResolver =
+    | ((
+        parent: Item,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => string | Promise<string>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Item,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>;
+      };
+
+  export type UpdatedAtResolver =
+    | ((
+        parent: Item,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => string | Promise<string>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Item,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>;
+      };
+
   export interface Type {
     id:
       | ((
@@ -292,6 +328,40 @@ export namespace ItemResolvers {
             ctx: Context,
             info: GraphQLResolveInfo
           ) => number | Promise<number>;
+        };
+
+    createdAt:
+      | ((
+          parent: Item,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Item,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => string | Promise<string>;
+        };
+
+    updatedAt:
+      | ((
+          parent: Item,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Item,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => string | Promise<string>;
         };
 
     __isTypeOf?: GraphQLIsTypeOfFn<Item, Context>;

@@ -2,7 +2,7 @@
 
 cat ./generated/prisma.fragments.graphql >> ./generated/prisma.graphql
 
-rimraf ./generated/prisma.fragments.graphql
+rm ./generated/prisma.fragments.graphql
 
 prisma-binding -i ./generated/prisma.graphql -b ./generated/prisma-binding/index.ts -l typescript
 
