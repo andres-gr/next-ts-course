@@ -12,6 +12,7 @@ server.start(
     port: process.env.APP_PORT,
   },
   ({ port }) => {
+    // eslint-disable-next-line no-console
     console.log(`Server is running on port: ${port}.`)
   },
 )
