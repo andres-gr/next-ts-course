@@ -121,6 +121,10 @@
       }
     ],
     "padding-line-between-statements": "off",
+    "nonblock-statement-body-position": [
+      "error",
+      "beside"
+    ],
     "import/newline-after-import": "off",
     "@typescript-eslint/semi": "off",
     "@typescript-eslint/prefer-interface": "off",

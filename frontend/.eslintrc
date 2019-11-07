@@ -126,6 +126,10 @@
       }
     ],
     "padding-line-between-statements": "off",
+    "nonblock-statement-body-position": [
+      "error",
+      "beside"
+    ],
     "import/newline-after-import": "off",
     "jsx-a11y/anchor-is-valid": [
       "error",
@@ -201,7 +205,9 @@
     },
     "import/resolver": {
       "node": {
-        "paths": ["./"]
+        "paths": [
+          "./"
+        ]
       },
       "typescript": {
         "alwaysTryTypes": true,

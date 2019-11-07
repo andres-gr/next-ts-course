@@ -1,25 +1,22 @@
 overwrite: true
 schema: ${APP_URL}:${APP_PORT}
-# documents:
-#   - 'frontend/graphql/documents/**/*.graphql'
-#   - 'frontend/graphql/generated/**/*.graphql'
+documents:
+  - 'frontend/graphql/documents/**/*.graphql'
+  - 'frontend/graphql/generated/**/*.graphql'
 generates:
   ./frontend/graphql/schema.graphql:
     plugins:
       - schema-ast
-    # hooks:
-    #   afterOneFileWrite:
-    #     - postinstallclient 
-  ./frontend/graphql/generated/graphql.tsx:
+  ./frontend/graphql/generated/types.ts:
     plugins:
       - typescript
       - typescript-operations
       - typescript-react-apollo
     config:
-      scalars:
-        DateTime: Date
-        JSON: { [key: string]: any }
-      skipTypename: true
       withComponent: false
       withHOC: false
       withHooks: true
+config:
+  scalars:
+    DateTime: Date
+    JSON: { [key: string]: any }

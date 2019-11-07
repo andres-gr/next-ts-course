@@ -1,4 +1,4 @@
-import styled, { CreateStyled } from '@emotion/styled'
+import emotionStyled, { CreateStyled } from '@emotion/styled'
 
 interface Theme {
   black: string
@@ -20,6 +20,8 @@ const theme: Theme = {
   red       : '#FF0000',
 }
 
+const styled = emotionStyled as CreateStyled<Theme>
+
 export { theme }
 
-export default styled as CreateStyled<Theme>
+export default styled

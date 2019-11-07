@@ -50,6 +50,7 @@
     "babel-plugin-import-graphql": "^2.7.0",
     "babel-plugin-module-resolver": "^3.2.0",
     "casual": "^1.6.2",
+    "dotenv-webpack": "^1.7.0",
     "enzyme-to-json": "^3.4.3",
     "eslint": "6.6.0",
     "eslint-config-airbnb-typescript": "6.0.0",
@@ -95,8 +96,9 @@
         {
           "alias": {
             "Components": "./components/",
+            "GraphQL": "./graphql/generated/",
             "Lib": "./lib/",
-            "Styles": "./components/styles/"
+            "Styles": "./styles/"
           }
         }
       ]

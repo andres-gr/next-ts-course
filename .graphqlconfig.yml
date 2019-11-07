@@ -1,4 +1,13 @@
 projects:
+  app-client:
+    schemaPath: ./frontend/graphql/schema.graphql
+    includes: [
+      "**/*.graphql",
+      "**/*.gql"
+    ]
+    extensions:
+      endpoints:
+        default: ${env:APP_URL}:${env:APP_PORT}
   app:
     schemaPath: schema.graphql
     includes: [
