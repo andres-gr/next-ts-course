@@ -31,6 +31,9 @@
       ],
       "Styles/*": [
         "styles/*"
+      ],
+      "Utils/*": [
+        "utils/*"
       ]
     }
   },

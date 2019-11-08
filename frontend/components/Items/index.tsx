@@ -1,20 +1,12 @@
-import { FC } from 'react'
 import { useAllItemsQuery } from 'GraphQL/types'
 import styled from 'Styles/theme'
+import ItemsList from 'Components/Items/ItemsList'
 
 const Center = styled.div`
   text-align: center;
 `
 
-const ItemsList = styled.div`
-  display: grid;
-  grid-gap: 60px;
-  grid-template-columns: 1fr 1fr;
-  margin: 0 auto;
-  max-width: ${props => props.theme.maxWidth};
-`
-
-const Items: FC = () => {
+const Items = () => {
   const {
     data,
     error,
@@ -25,17 +17,11 @@ const Items: FC = () => {
   
   if (error) return <p>Error: { error.message }</p>
   
+  const { items } = data
+  
   return (
     <Center>
-      <ItemsList>
-        { data.items.map(item => (
-          <p
-            key={ item.id }
-          >
-            { item.title }
-          </p>
-        )) }
-      </ItemsList>
+      <ItemsList items={ items } />
     </Center>
   )
 }

@@ -1,8 +1,7 @@
-import { FC } from 'react'
 import Link from 'next/link'
 import NavStyles from 'Styles/NavStyles'
 
-const Nav: FC = () => (
+const Nav = () => (
   <NavStyles>
     <Link href="/items">
       <a>Shop</a>

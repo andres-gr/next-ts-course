@@ -1,4 +1,3 @@
-import { FC } from 'react'
 import {
   Global,
   css,
@@ -33,7 +32,7 @@ const globalStyles = css`
   }
 `
 
-const GlobalStyles: FC = () => (
+const GlobalStyles = () => (
   <Global
     styles={ globalStyles }
   />

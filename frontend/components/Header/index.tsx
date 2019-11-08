@@ -1,4 +1,3 @@
-import { FC } from 'react'
 import Link from 'next/link'
 import Router from 'next/router'
 import NProgress from 'nprogress'
@@ -55,7 +54,7 @@ const StyledHeader = styled.header`
   }
 `
 
-const Header: FC = () => (
+const Header = () => (
   <StyledHeader>
     <div className="bar">
       <Logo>

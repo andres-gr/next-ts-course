@@ -20,6 +20,7 @@
     "emotion-theming": "^10.0.19",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
+    "formik": "^2.0.3",
     "graphql": "^14.5.8",
     "graphql-tag": "^2.10.1",
     "immer": "^5.0.0",
@@ -36,6 +37,7 @@
     "react-stripe-checkout": "^2.6.3",
     "react-transition-group": "^4.3.0",
     "waait": "^1.0.5",
+    "yup": "^0.27.0",
     "zustand": "^2.2.0"
   },
   "devDependencies": {
@@ -98,7 +100,8 @@
             "Components": "./components/",
             "GraphQL": "./graphql/generated/",
             "Lib": "./lib/",
-            "Styles": "./styles/"
+            "Styles": "./styles/",
+            "Utils": "./utils/"
           }
         }
       ]
