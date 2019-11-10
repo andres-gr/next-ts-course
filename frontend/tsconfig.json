@@ -29,6 +29,9 @@
       "Lib/*": [
         "lib/*"
       ],
+      "Schemas/*": [
+        "schemas/*"
+      ],
       "Styles/*": [
         "styles/*"
       ],

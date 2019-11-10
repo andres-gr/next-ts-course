@@ -20,7 +20,12 @@
       "error",
       2,
       {
-        "SwitchCase": 1
+        "SwitchCase": 1,
+        "VariableDeclarator": {
+          "var": 2,
+          "let": 2,
+          "const": 3
+        }
       }
     ],
     "semi": [
@@ -104,8 +109,28 @@
     "object-curly-newline": [
       "error",
       {
-        "multiline": true,
-        "consistent": true
+        "ObjectExpression": {
+          "multiline": true,
+          "minProperties": 2
+        },
+        "ObjectPattern": {
+          "multiline": true,
+          "minProperties": 2
+        },
+        "ImportDeclaration": {
+          "multiline": true,
+          "minProperties": 2
+        },
+        "ExportDeclaration": {
+          "multiline": true,
+          "minProperties": 1
+        }
+      }
+    ],
+    "object-property-newline": [
+      "error",
+      {
+        "allowAllPropertiesOnSameLine": false
       }
     ],
     "default-case": "off",
@@ -135,10 +160,30 @@
         "minKeys": 2
       }
     ],
+    "sort-imports": [
+      "error",
+      {
+        "ignoreCase": true,
+        "ignoreDeclarationSort": true,
+        "ignoreMemberSort": false
+      }
+    ],
     "import/newline-after-import": "off",
     "@typescript-eslint/semi": "off",
     "@typescript-eslint/prefer-interface": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/indent": [
+      "error",
+      2,
+      {
+        "SwitchCase": 1,
+        "VariableDeclarator": {
+          "var": 2,
+          "let": 2,
+          "const": 3
+        }
+      }
+    ],
     "putout/putout": "off",
     "putout/destructuring-as-function-argument": "off",
     "module-resolver/use-alias": [

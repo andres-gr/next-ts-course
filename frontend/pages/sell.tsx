@@ -1,5 +1,6 @@
 import { NextPage } from 'next'
+import CreateItem from 'Components/CreateItem'
 
-const Sell: NextPage = () => <p>Sell page.</p>
+const Sell: NextPage = () => <CreateItem />
 
 export default Sell
