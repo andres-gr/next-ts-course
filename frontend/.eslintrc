@@ -16,6 +16,7 @@
     "import",
     "putout",
     "emotion",
+    "sort-destructure-keys",
     "react-hooks"
   ],
   "rules": {
@@ -130,6 +131,15 @@
       "error",
       "beside"
     ],
+    "sort-keys": [
+      "error",
+      "asc",
+      {
+        "caseSensitive": false,
+        "natural": true,
+        "minKeys": 2
+      }
+    ],
     "import/newline-after-import": "off",
     "jsx-a11y/anchor-is-valid": [
       "error",
@@ -151,8 +161,12 @@
     "react/react-in-jsx-scope": "off",
     "react/jsx-curly-spacing": [
       "error",
-      "always",
       {
+        "when": "always",
+        "children": true
+      },
+      {
+        "allowMultiline": true,
         "spacing": {
           "objectLiterals": "never"
         }
@@ -173,6 +187,64 @@
       }
     ],
     "react/jsx-props-no-spreading": "off",
+    "react/jsx-max-props-per-line": [
+      "error",
+      {
+        "when": "always",
+        "maximum": 1
+      }
+    ],
+    "react/sort-comp": [
+      "error",
+      {
+        "order": [
+          "type-annotations",
+          "static-variables",
+          "static-methods",
+          "instance-variables",
+          "instance-methods",
+          "lifecycle",
+          "getters",
+          "setters",
+          "/^handle.+$/",
+          "everything-else",
+          "rendering"
+        ],
+        "groups": {
+          "rendering": [
+            "/^render.+$/",
+            "render"
+          ]
+        }
+      }
+    ],
+    "react/jsx-sort-default-props": [
+      "error",
+      {
+        "ignoreCase": true
+      }
+    ],
+    "react/sort-prop-types": [
+      "error",
+      {
+        "callbacksLast": true,
+        "ignoreCase": true,
+        "requiredFirst": true,
+        "sortShapeProp": true
+      }
+    ],
+    "react/jsx-sort-props": [
+      "error",
+      {
+        "callbacksLast": true,
+        "ignoreCase": true,
+        "shorthandFirst": true,
+        "reservedFirst": [
+          "key",
+          "ref"
+        ]
+      }
+    ],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "@typescript-eslint/semi": "off",
@@ -194,7 +266,8 @@
     "emotion/syntax-preference": [
       "error",
       "string"
-    ]
+    ],
+    "sort-destructure-keys/sort-destructure-keys": "error"
   },
   "settings": {
     "import/parsers": {

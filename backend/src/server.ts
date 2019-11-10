@@ -8,19 +8,19 @@ import {
 } from './db'
 
 const create = () => new GraphQLServer({
-  typeDefs  : path.resolve(__dirname, 'prisma/schema.graphql'),
-  resolvers : {
-    Query,
-    Mutation,
-  } as any,
-  resolverValidationOptions: {
-    requireResolversForResolveType: false,
-  },
   context: req => ({
     ...req,
     prisma,
     prismaClient,
   }),
+  resolvers: {
+    Mutation,
+    Query,
+  } as any,
+  resolverValidationOptions: {
+    requireResolversForResolveType: false,
+  },
+  typeDefs: path.resolve(__dirname, 'prisma/schema.graphql'),
 })
 
 export default create

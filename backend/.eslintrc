@@ -11,7 +11,8 @@
   "plugins": [
     "module-resolver",
     "import",
-    "putout"
+    "putout",
+    "sort-destructure-keys"
   ],
   "rules": {
     "no-var": "error",
@@ -125,6 +126,15 @@
       "error",
       "beside"
     ],
+    "sort-keys": [
+      "error",
+      "asc",
+      {
+        "caseSensitive": false,
+        "natural": true,
+        "minKeys": 2
+      }
+    ],
     "import/newline-after-import": "off",
     "@typescript-eslint/semi": "off",
     "@typescript-eslint/prefer-interface": "off",
@@ -139,12 +149,15 @@
         ],
         "projectRoot": "./backend/"
       }
-    ]
+    ],
+    "sort-destructure-keys/sort-destructure-keys": "error"
   },
   "settings": {
     "import/resolver": {
       "node": {
-        "paths": ["src"]
+        "paths": [
+          "src"
+        ]
       },
       "typescript": {
         "alwaysTryTypes": true,
