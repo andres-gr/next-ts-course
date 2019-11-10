@@ -2,10 +2,20 @@ import Head from 'next/head'
 
 const Meta = () => (
   <Head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      content="width=device-width, initial-scale=1"
+      name="viewport"
+    />
     <meta charSet="utf-8" />
-    <link rel="shortcut icon" href="/favicon.png" />
-    <link rel="stylesheet" type="text/css" href="/nprogress.css" />
+    <link
+      href="/favicon.png"
+      rel="shortcut icon"
+    />
+    <link
+      href="/nprogress.css"
+      rel="stylesheet"
+      type="text/css"
+    />
     <title>Sick Fits!</title>
   </Head>
 )
