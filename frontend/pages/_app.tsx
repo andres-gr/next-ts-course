@@ -2,7 +2,10 @@ import App, { AppContext } from 'next/app'
 import Page from 'Components/Page'
 
 class MyApp extends App {
-  static async getInitialProps ({ Component, ctx }: AppContext) {
+  static async getInitialProps ({
+    Component,
+    ctx,
+  }: AppContext) {
     let pageProps: { query?: any } = { query: '' }
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx)

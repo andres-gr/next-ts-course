@@ -1,0 +1,7 @@
+#import "../../generated/app-client.fragments.graphql"
+
+mutation CreateItem ($data: ItemCreateInput!) {
+  createItem(data: $data) {
+    ...Item
+  }
+}

@@ -17,10 +17,8 @@ const create = () => new GraphQLServer({
     Mutation,
     Query,
   } as any,
-  resolverValidationOptions: {
-    requireResolversForResolveType: false,
-  },
-  typeDefs: path.resolve(__dirname, 'prisma/schema.graphql'),
+  resolverValidationOptions : { requireResolversForResolveType: false },
+  typeDefs                  : path.resolve(__dirname, 'prisma/schema.graphql'),
 })
 
 export default create

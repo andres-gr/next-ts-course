@@ -1,6 +1,6 @@
 import {
-  Global,
   css,
+  Global,
 } from '@emotion/core'
 import { theme } from 'Styles/theme'
 

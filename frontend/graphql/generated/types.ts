@@ -64,6 +64,19 @@ export type User = Node & {
   updatedAt: Scalars['DateTime'],
 };
 
+export type CreateItemMutationVariables = {
+  data: ItemCreateInput
+};
+
+
+export type CreateItemMutation = (
+  { __typename?: 'Mutation' }
+  & { createItem: (
+    { __typename?: 'Item' }
+    & ItemFragment
+  ) }
+);
+
 export type AllItemsQueryVariables = {};
 
 
@@ -165,6 +178,38 @@ export const UserDeepNestingFragmentDoc = gql`
   updatedAt
 }
     `;
+export const CreateItemDocument = gql`
+    mutation CreateItem($data: ItemCreateInput!) {
+  createItem(data: $data) {
+    ...Item
+  }
+}
+    ${ItemFragmentDoc}`;
+export type CreateItemMutationFn = ApolloReactCommon.MutationFunction<CreateItemMutation, CreateItemMutationVariables>;
+
+/**
+ * __useCreateItemMutation__
+ *
+ * To run a mutation, you first call `useCreateItemMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateItemMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createItemMutation, { data, loading, error }] = useCreateItemMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useCreateItemMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<CreateItemMutation, CreateItemMutationVariables>) {
+        return ApolloReactHooks.useMutation<CreateItemMutation, CreateItemMutationVariables>(CreateItemDocument, baseOptions);
+      }
+export type CreateItemMutationHookResult = ReturnType<typeof useCreateItemMutation>;
+export type CreateItemMutationResult = ApolloReactCommon.MutationResult<CreateItemMutation>;
+export type CreateItemMutationOptions = ApolloReactCommon.BaseMutationOptions<CreateItemMutation, CreateItemMutationVariables>;
 export const AllItemsDocument = gql`
     query AllItems {
   items {

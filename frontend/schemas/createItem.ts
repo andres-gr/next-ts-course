@@ -1,4 +1,5 @@
 import {
+  InferType,
   number,
   object,
   string,
@@ -19,5 +20,7 @@ const createItemSchema = object().shape({
     .default('')
     .required(),
 })
+
+export type CreateItemSchema = InferType<typeof createItemSchema>
 
 export default createItemSchema

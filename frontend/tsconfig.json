@@ -19,12 +19,16 @@
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": false,
+    "strictNullChecks": false,
     "paths": {
       "Components/*": [
         "components/*"
       ],
       "GraphQL/*": [
         "graphql/generated/*"
+      ],
+      "Hooks/*": [
+        "hooks/*"
       ],
       "Lib/*": [
         "lib/*"

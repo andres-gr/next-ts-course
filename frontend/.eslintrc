@@ -17,6 +17,7 @@
     "putout",
     "emotion",
     "sort-destructure-keys",
+    "sort-exports",
     "react-hooks"
   ],
   "rules": {
@@ -116,19 +117,23 @@
       {
         "ObjectExpression": {
           "multiline": true,
-          "minProperties": 2
+          "minProperties": 2,
+          "consistent": true
         },
         "ObjectPattern": {
           "multiline": true,
-          "minProperties": 2
+          "minProperties": 2,
+          "consistent": true
         },
         "ImportDeclaration": {
           "multiline": true,
-          "minProperties": 2
+          "minProperties": 2,
+          "consistent": true
         },
         "ExportDeclaration": {
           "multiline": true,
-          "minProperties": 1
+          "minProperties": 2,
+          "consistent": true
         }
       }
     ],
@@ -171,6 +176,28 @@
         "ignoreCase": true,
         "ignoreDeclarationSort": true,
         "ignoreMemberSort": false
+      }
+    ],
+    "array-element-newline": [
+      "error",
+      {
+        "multiline": true,
+        "minItems": 2
+      }
+    ],
+    "array-bracket-newline": [
+      "error",
+      {
+        "multiline": true,
+        "minItems": 2
+      }
+    ],
+    "no-void": "off",
+    "keyword-spacing": [
+      "error",
+      {
+        "before": true,
+        "after": true
       }
     ],
     "import/newline-after-import": "off",
@@ -306,6 +333,14 @@
     ],
     "putout/putout": "off",
     "putout/destructuring-as-function-argument": "off",
+    "putout/multiple-properties-destructuring": [
+      "error",
+      {
+        "minProperties": 2
+      }
+    ],
+    "putout/single-property-destructuring": "off",
+    "putout/long-properties-destructuring": "error",
     "module-resolver/use-alias": [
       "error",
       {
@@ -321,15 +356,16 @@
       "error",
       "string"
     ],
-    "sort-destructure-keys/sort-destructure-keys": "error"
+    "sort-destructure-keys/sort-destructure-keys": "error",
+    "sort-exports/sort-exports": [
+      "error",
+      {
+        "sortDir": "asc",
+        "ignoreCase": true
+      }
+    ]
   },
   "settings": {
-    "import/parsers": {
-      "@typescript-eslint/parser": [
-        ".ts",
-        ".tsx"
-      ]
-    },
     "import/resolver": {
       "node": {
         "paths": [
@@ -338,7 +374,10 @@
       },
       "typescript": {
         "alwaysTryTypes": true,
-        "directory": "./frontend/tsconfig.json"
+        "directory": [
+          "./backend/tsconfig.json",
+          "./frontend/tsconfig.json"
+        ]
       }
     }
   }

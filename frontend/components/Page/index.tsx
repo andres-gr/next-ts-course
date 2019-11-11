@@ -30,8 +30,6 @@ const Page: FC = ({ children }) => (
   </ThemeProvider>
 )
 
-Page.propTypes = {
-  children: PropTypes.node.isRequired,
-}
+Page.propTypes = { children: PropTypes.node.isRequired }
 
 export default Page

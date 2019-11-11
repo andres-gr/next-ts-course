@@ -12,7 +12,8 @@
     "module-resolver",
     "import",
     "putout",
-    "sort-destructure-keys"
+    "sort-destructure-keys",
+    "sort-exports"
   ],
   "rules": {
     "no-var": "error",
@@ -111,19 +112,23 @@
       {
         "ObjectExpression": {
           "multiline": true,
-          "minProperties": 2
+          "minProperties": 2,
+          "consistent": true
         },
         "ObjectPattern": {
           "multiline": true,
-          "minProperties": 2
+          "minProperties": 2,
+          "consistent": true
         },
         "ImportDeclaration": {
           "multiline": true,
-          "minProperties": 2
+          "minProperties": 2,
+          "consistent": true
         },
         "ExportDeclaration": {
           "multiline": true,
-          "minProperties": 1
+          "minProperties": 2,
+          "consistent": true
         }
       }
     ],
@@ -168,6 +173,28 @@
         "ignoreMemberSort": false
       }
     ],
+    "array-element-newline": [
+      "error",
+      {
+        "multiline": true,
+        "minItems": 2
+      }
+    ],
+    "array-bracket-newline": [
+      "error",
+      {
+        "multiline": true,
+        "minItems": 2
+      }
+    ],
+    "no-void": "off",
+    "keyword-spacing": [
+      "error",
+      {
+        "before": true,
+        "after": true
+      }
+    ],
     "import/newline-after-import": "off",
     "@typescript-eslint/semi": "off",
     "@typescript-eslint/prefer-interface": "off",
@@ -186,6 +213,14 @@
     ],
     "putout/putout": "off",
     "putout/destructuring-as-function-argument": "off",
+    "putout/multiple-properties-destructuring": [
+      "error",
+      {
+        "minProperties": 2
+      }
+    ],
+    "putout/single-property-destructuring": "off",
+    "putout/long-properties-destructuring": "error",
     "module-resolver/use-alias": [
       "error",
       {
@@ -195,18 +230,28 @@
         "projectRoot": "./backend/"
       }
     ],
-    "sort-destructure-keys/sort-destructure-keys": "error"
+    "sort-destructure-keys/sort-destructure-keys": "error",
+    "sort-exports/sort-exports": [
+      "error",
+      {
+        "sortDir": "asc",
+        "ignoreCase": true
+      }
+    ]
   },
   "settings": {
     "import/resolver": {
       "node": {
         "paths": [
-          "src"
+          "./src"
         ]
       },
       "typescript": {
         "alwaysTryTypes": true,
-        "directory": "./backend/tsconfig.json"
+        "directory": [
+          "./backend/tsconfig.json",
+          "./frontend/tsconfig.json"
+        ]
       }
     }
   }
