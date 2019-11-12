@@ -1,7 +1,7 @@
 import {
   ChangeEvent,
+  FC,
   useCallback,
-  useEffect,
 } from 'react'
 import {
   FastField,
@@ -10,46 +10,45 @@ import {
 } from 'formik'
 import Form from 'Styles/Form'
 import DisplayError, { DisplayErrorProps } from 'Components/ErrorMessage'
-import useUploadFile from 'Hooks/useUploadFile'
+import useFileReader from 'Hooks/useFileReader'
 
-type FieldsProps = FormikProps<FormikValues> & DisplayErrorProps & { loading: boolean }
+type FieldsProps = FormikProps<FormikValues> & DisplayErrorProps & { loading: boolean } & { handleSetFile: (files?: FileList | null) => void }
 
-const Fields = ({
+const Fields: FC<FieldsProps> = ({
   error,
+  handleSetFile,
   handleSubmit,
+  isSubmitting,
   loading,
-  setFieldValue,
 }: FieldsProps) => {
   const [
-    { state },
-    handleFileUpload,
-  ] = useUploadFile()
+    {
+      state: { fileUri },
+    },
+    handleFileChange,
+  ] = useFileReader()
   
-  const handleFileChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    handleFileUpload(e)
-  }, [handleFileUpload])
-  
-  useEffect(() => {
-    if (state.done) {
-      setFieldValue('image', state.uri.image)
-      setFieldValue('largeImage', state.uri.largeImage)
+  const onFileChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    handleFileChange(e)
+    const { files } = e.target
+    if (files.length > 0) {
+      handleSetFile(files)
       return
     }
-    setFieldValue('image', undefined)
-    setFieldValue('largeImage', undefined)
+    handleSetFile(null)
   }, [
-    setFieldValue,
-    state.done,
-    state.uri.image,
-    state.uri.largeImage,
+    handleFileChange,
+    handleSetFile,
   ])
+  
+  const busy = loading || isSubmitting
   
   return (
     <Form onSubmit={ handleSubmit }>
       <DisplayError error={ error } />
       <fieldset
-        aria-busy={ loading }
-        disabled={ loading }
+        aria-busy={ busy }
+        disabled={ busy }
       >
         <label htmlFor="title">
           Title
@@ -74,12 +73,18 @@ const Fields = ({
         <label htmlFor="image">
           Image
           <input
-            disabled={ state.loading }
             name="file"
             placeholder="Upload an image"
             type="file"
-            onChange={ handleFileChange }
+            onChange={ onFileChange }
           />
+          { fileUri && (
+            <img
+              alt="Upload"
+              src={ fileUri }
+              width="200"
+            />
+          ) }
         </label>
         <button type="submit">
           Submit

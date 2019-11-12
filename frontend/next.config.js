@@ -13,6 +13,7 @@ module.exports = {
         systemvars: true
       })
     ]
+    config.devtool = 'eval-source-map'
     return config
   }
 }

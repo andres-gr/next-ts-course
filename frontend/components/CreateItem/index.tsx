@@ -3,15 +3,39 @@ import {
   useCallback,
 } from 'react'
 import { useRouter } from 'next/router'
-import { Formik } from 'formik'
+import {
+  Formik,
+  FormikProps,
+  FormikValues,
+} from 'formik'
 import createItemSchema from 'Schemas/createItem'
 import Fields from 'Components/CreateItem/Fields'
 import {
   ItemCreateInput,
   useCreateItemMutation,
 } from 'GraphQL/types'
+import { useImmer } from 'Hooks/useImmer'
+import useUploadFile from 'Hooks/useUploadFile'
+
+type FileEvent = {
+  state: {
+    files?: FileList | null
+  }
+}
+
+type HandleFileUpload = (files?: FileList | null) => void
+
+type HandleSubmit = (data: ItemCreateInput, formikArgs: FormikProps<FormikValues>) => void
+
+const initState = {
+  state: {
+    files: null,
+  },
+}
 
 const CreateItem: FC = () => {
+  const router = useRouter()
+  
   const [
     createItem,
     {
@@ -20,22 +44,50 @@ const CreateItem: FC = () => {
     },
   ] = useCreateItemMutation()
   
-  const router = useRouter()
+  const [
+    {
+      state: { files },
+    },
+    setFiles,
+  ] = useImmer<FileEvent>(initState)
   
-  const handleSubmit = useCallback((data: ItemCreateInput) => {
+  const handleFileUpload = useUploadFile()
+  
+  const handleSetFile = useCallback<HandleFileUpload>(readFiles => {
+    setFiles(({ state }) => { state.files = readFiles })
+  }, [setFiles])
+  
+  const handleSubmit = useCallback<HandleSubmit>((data, { setSubmitting }) => {
+    setSubmitting(true)
     async function body () {
-      const {
-        data: {
-          createItem: { id },
-        },
-      } = await createItem({
-        variables: { data },
-      })
-      router.push(`/item/${id}`)
+      try {
+        const {
+          error: uploadError,
+          uri,
+        } = await handleFileUpload(files)
+        if (uploadError) throw uploadError
+        const variables = {
+          data: {
+            ...data,
+            ...uri,
+          },
+        }
+        const {
+          data: {
+            createItem: { id },
+          },
+        } = await createItem({ variables })
+        router.push(`/item/${id}`)
+      } catch (e) {
+        console.warn(e)
+        setSubmitting(false)
+      }
     }
     body()
   }, [
     createItem,
+    files,
+    handleFileUpload,
     router,
   ])
   
@@ -49,6 +101,7 @@ const CreateItem: FC = () => {
         <Fields
           { ...props }
           error={ error }
+          handleSetFile={ handleSetFile }
           loading={ loading }
         />
       ) }
