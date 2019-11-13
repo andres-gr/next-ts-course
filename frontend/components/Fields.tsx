@@ -44,7 +44,7 @@ const Fields: FC<FieldsProps> = ({
   
   const busy = loading || isSubmitting
   
-  const image = values.image || fileUri
+  const image = fileUri || values.image
   
   return (
     <Form onSubmit={ handleSubmit }>
