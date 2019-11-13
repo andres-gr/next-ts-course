@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/andres-garcia-rivera-9f50f8/sick-fits/dev
-# timestamp: Tue Nov 05 2019 22:15:17 GMT-0600 (Central Standard Time)
+# timestamp: Mon Nov 11 2019 23:10:39 GMT-0600 (Central Standard Time)
 
 type AggregateItem {
   count: Int!
@@ -726,31 +726,20 @@ input UserWhereUniqueInput {
 # Nested fragments will spread one layer deep
 
 
-fragment ItemEdge on ItemEdge {
-  node {
-    ...ItemNoNesting
-  }
-  cursor
+fragment User on User {
+  id
+  name
+  createdAt
+  updatedAt
 }
 
-fragment ItemPreviousValues on ItemPreviousValues {
+fragment Item on Item {
   id
   title
   description
   image
   largeImage
   price
-  createdAt
-  updatedAt
-}
-
-fragment AggregateItem on AggregateItem {
-  count
-}
-
-fragment User on User {
-  id
-  name
   createdAt
   updatedAt
 }
@@ -767,39 +756,6 @@ fragment UserConnection on UserConnection {
   }
 }
 
-fragment ItemSubscriptionPayload on ItemSubscriptionPayload {
-  mutation
-  node {
-    ...ItemNoNesting
-  }
-  updatedFields
-  previousValues {
-    ...ItemPreviousValuesNoNesting
-  }
-}
-
-fragment UserPreviousValues on UserPreviousValues {
-  id
-  name
-  createdAt
-  updatedAt
-}
-
-fragment UserSubscriptionPayload on UserSubscriptionPayload {
-  mutation
-  node {
-    ...UserNoNesting
-  }
-  updatedFields
-  previousValues {
-    ...UserPreviousValuesNoNesting
-  }
-}
-
-fragment BatchPayload on BatchPayload {
-  count
-}
-
 fragment PageInfo on PageInfo {
   hasNextPage
   hasPreviousPage
@@ -807,15 +763,15 @@ fragment PageInfo on PageInfo {
   endCursor
 }
 
-fragment Item on Item {
-  id
-  title
-  description
-  image
-  largeImage
-  price
-  createdAt
-  updatedAt
+fragment UserEdge on UserEdge {
+  node {
+    ...UserNoNesting
+  }
+  cursor
+}
+
+fragment AggregateUser on AggregateUser {
+  count
 }
 
 fragment ItemConnection on ItemConnection {
@@ -830,27 +786,51 @@ fragment ItemConnection on ItemConnection {
   }
 }
 
-fragment AggregateUser on AggregateUser {
-  count
-}
-
-fragment UserEdge on UserEdge {
+fragment ItemEdge on ItemEdge {
   node {
-    ...UserNoNesting
+    ...ItemNoNesting
   }
   cursor
 }
 
-
-# No Relational objects
-# No nested fragments
-
-
-fragment ItemEdgeNoNesting on ItemEdge {
-  cursor
+fragment AggregateItem on AggregateItem {
+  count
 }
 
-fragment ItemPreviousValuesNoNesting on ItemPreviousValues {
+fragment BatchPayload on BatchPayload {
+  count
+}
+
+fragment UserSubscriptionPayload on UserSubscriptionPayload {
+  mutation
+  node {
+    ...UserNoNesting
+  }
+  updatedFields
+  previousValues {
+    ...UserPreviousValuesNoNesting
+  }
+}
+
+fragment UserPreviousValues on UserPreviousValues {
+  id
+  name
+  createdAt
+  updatedAt
+}
+
+fragment ItemSubscriptionPayload on ItemSubscriptionPayload {
+  mutation
+  node {
+    ...ItemNoNesting
+  }
+  updatedFields
+  previousValues {
+    ...ItemPreviousValuesNoNesting
+  }
+}
+
+fragment ItemPreviousValues on ItemPreviousValues {
   id
   title
   description
@@ -861,43 +841,16 @@ fragment ItemPreviousValuesNoNesting on ItemPreviousValues {
   updatedAt
 }
 
-fragment AggregateItemNoNesting on AggregateItem {
-  count
-}
+
+# No Relational objects
+# No nested fragments
+
 
 fragment UserNoNesting on User {
   id
   name
   createdAt
   updatedAt
-}
-
-fragment ItemSubscriptionPayloadNoNesting on ItemSubscriptionPayload {
-  mutation
-  updatedFields
-}
-
-fragment UserPreviousValuesNoNesting on UserPreviousValues {
-  id
-  name
-  createdAt
-  updatedAt
-}
-
-fragment UserSubscriptionPayloadNoNesting on UserSubscriptionPayload {
-  mutation
-  updatedFields
-}
-
-fragment BatchPayloadNoNesting on BatchPayload {
-  count
-}
-
-fragment PageInfoNoNesting on PageInfo {
-  hasNextPage
-  hasPreviousPage
-  startCursor
-  endCursor
 }
 
 fragment ItemNoNesting on Item {
@@ -911,29 +864,51 @@ fragment ItemNoNesting on Item {
   updatedAt
 }
 
-fragment AggregateUserNoNesting on AggregateUser {
-  count
+fragment PageInfoNoNesting on PageInfo {
+  hasNextPage
+  hasPreviousPage
+  startCursor
+  endCursor
 }
 
 fragment UserEdgeNoNesting on UserEdge {
   cursor
 }
 
+fragment AggregateUserNoNesting on AggregateUser {
+  count
+}
 
-# Deeply nested Fragments
-# Will include n nested fragments
-# If there is a recursive relation you will receive a
-# "Cannot spread fragment within itself" error when using
-
-
-fragment ItemEdgeDeepNesting on ItemEdge {
-  node {
-    ...ItemDeepNesting
-  }
+fragment ItemEdgeNoNesting on ItemEdge {
   cursor
 }
 
-fragment ItemPreviousValuesDeepNesting on ItemPreviousValues {
+fragment AggregateItemNoNesting on AggregateItem {
+  count
+}
+
+fragment BatchPayloadNoNesting on BatchPayload {
+  count
+}
+
+fragment UserSubscriptionPayloadNoNesting on UserSubscriptionPayload {
+  mutation
+  updatedFields
+}
+
+fragment UserPreviousValuesNoNesting on UserPreviousValues {
+  id
+  name
+  createdAt
+  updatedAt
+}
+
+fragment ItemSubscriptionPayloadNoNesting on ItemSubscriptionPayload {
+  mutation
+  updatedFields
+}
+
+fragment ItemPreviousValuesNoNesting on ItemPreviousValues {
   id
   title
   description
@@ -944,13 +919,27 @@ fragment ItemPreviousValuesDeepNesting on ItemPreviousValues {
   updatedAt
 }
 
-fragment AggregateItemDeepNesting on AggregateItem {
-  count
-}
+
+# Deeply nested Fragments
+# Will include n nested fragments
+# If there is a recursive relation you will receive a
+# "Cannot spread fragment within itself" error when using
+
 
 fragment UserDeepNesting on User {
   id
   name
+  createdAt
+  updatedAt
+}
+
+fragment ItemDeepNesting on Item {
+  id
+  title
+  description
+  image
+  largeImage
+  price
   createdAt
   updatedAt
 }
@@ -967,39 +956,6 @@ fragment UserConnectionDeepNesting on UserConnection {
   }
 }
 
-fragment ItemSubscriptionPayloadDeepNesting on ItemSubscriptionPayload {
-  mutation
-  node {
-    ...ItemDeepNesting
-  }
-  updatedFields
-  previousValues {
-    ...ItemPreviousValuesDeepNesting
-  }
-}
-
-fragment UserPreviousValuesDeepNesting on UserPreviousValues {
-  id
-  name
-  createdAt
-  updatedAt
-}
-
-fragment UserSubscriptionPayloadDeepNesting on UserSubscriptionPayload {
-  mutation
-  node {
-    ...UserDeepNesting
-  }
-  updatedFields
-  previousValues {
-    ...UserPreviousValuesDeepNesting
-  }
-}
-
-fragment BatchPayloadDeepNesting on BatchPayload {
-  count
-}
-
 fragment PageInfoDeepNesting on PageInfo {
   hasNextPage
   hasPreviousPage
@@ -1007,15 +963,15 @@ fragment PageInfoDeepNesting on PageInfo {
   endCursor
 }
 
-fragment ItemDeepNesting on Item {
-  id
-  title
-  description
-  image
-  largeImage
-  price
-  createdAt
-  updatedAt
+fragment UserEdgeDeepNesting on UserEdge {
+  node {
+    ...UserDeepNesting
+  }
+  cursor
+}
+
+fragment AggregateUserDeepNesting on AggregateUser {
+  count
 }
 
 fragment ItemConnectionDeepNesting on ItemConnection {
@@ -1030,14 +986,58 @@ fragment ItemConnectionDeepNesting on ItemConnection {
   }
 }
 
-fragment AggregateUserDeepNesting on AggregateUser {
+fragment ItemEdgeDeepNesting on ItemEdge {
+  node {
+    ...ItemDeepNesting
+  }
+  cursor
+}
+
+fragment AggregateItemDeepNesting on AggregateItem {
   count
 }
 
-fragment UserEdgeDeepNesting on UserEdge {
+fragment BatchPayloadDeepNesting on BatchPayload {
+  count
+}
+
+fragment UserSubscriptionPayloadDeepNesting on UserSubscriptionPayload {
+  mutation
   node {
     ...UserDeepNesting
   }
-  cursor
+  updatedFields
+  previousValues {
+    ...UserPreviousValuesDeepNesting
+  }
+}
+
+fragment UserPreviousValuesDeepNesting on UserPreviousValues {
+  id
+  name
+  createdAt
+  updatedAt
+}
+
+fragment ItemSubscriptionPayloadDeepNesting on ItemSubscriptionPayload {
+  mutation
+  node {
+    ...ItemDeepNesting
+  }
+  updatedFields
+  previousValues {
+    ...ItemPreviousValuesDeepNesting
+  }
+}
+
+fragment ItemPreviousValuesDeepNesting on ItemPreviousValues {
+  id
+  title
+  description
+  image
+  largeImage
+  price
+  createdAt
+  updatedAt
 }
 

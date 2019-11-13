@@ -66,7 +66,13 @@
     ],
     "comma-dangle": [
       "error",
-      "always-multiline"
+      {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "always-multiline",
+        "functions": "always-multiline"
+      }
     ],
     "no-extra-parens": [
       "error",
@@ -97,7 +103,7 @@
       {
         "max": 1,
         "maxBOF": 0,
-        "maxEOF": 1
+        "maxEOF": 0
       }
     ],
     "object-shorthand": [

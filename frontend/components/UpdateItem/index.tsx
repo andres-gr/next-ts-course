@@ -6,14 +6,21 @@ import { useRouter } from 'next/router'
 import { Formik } from 'formik'
 import createItemSchema from 'Schemas/createItem'
 import Fields from 'Components/Fields'
-import { useCreateItemMutation } from 'GraphQL/types'
+import {
+  useSingleItemQuery,
+  useUpdateItemMutation,
+} from 'GraphQL/types'
 import { useImmer } from 'Hooks/useImmer'
 import useUploadFile from 'Hooks/useUploadFile'
 import {
   Files,
   HandleFileUpload,
   HandleSubmit,
+  UseUploadFileResult,
 } from 'Utils/types'
+import stripApollo from 'Lib/stripApollo'
+
+type Where = { id: string }
 
 const initState = {
   state: {
@@ -21,16 +28,30 @@ const initState = {
   },
 }
 
-const CreateItem: FC = () => {
+const UpdateItem: FC = () => {
   const router = useRouter()
   
+  const {
+    query: { id },
+  } = router
+  
   const [
-    createItem,
+    updateItem,
     {
-      error,
-      loading,
+      error: updateError,
+      loading: updateLoading,
     },
-  ] = useCreateItemMutation()
+  ] = useUpdateItemMutation()
+  
+  const {
+    data: { item } = { item: null },
+    error: itemError,
+    loading: itemLoading,
+  } = useSingleItemQuery({
+    variables: {
+      where: { id } as Where,
+    },
+  })
   
   const [
     {
@@ -49,23 +70,25 @@ const CreateItem: FC = () => {
     setSubmitting(true)
     async function body () {
       try {
-        const {
-          error: uploadError,
-          uri,
-        } = await handleFileUpload(files)
-        if (uploadError) throw uploadError
+        let uri: UseUploadFileResult['uri'] = {}
+        if (files) {
+          const {
+            error: uploadError,
+            uri: uriData,
+          } = await handleFileUpload(files)
+          if (uploadError) throw uploadError
+          uri = uriData
+        }
+        const itemData = stripApollo(data)
         const variables = {
           data: {
-            ...data,
+            ...itemData,
             ...uri,
           },
+          where: { id } as Where,
         }
-        const {
-          data: {
-            createItem: { id },
-          },
-        } = await createItem({ variables })
-        router.push(`/item/${id}`)
+        await updateItem({ variables })
+        router.push('/')
       } catch (e) {
         console.warn(e)
         setSubmitting(false)
@@ -73,15 +96,20 @@ const CreateItem: FC = () => {
     }
     body()
   }, [
-    createItem,
     files,
     handleFileUpload,
+    id,
     router,
+    updateItem,
   ])
+  
+  const error = updateError || itemError
+  
+  if (itemLoading) return <h2>Loading item...</h2>
   
   return (
     <Formik
-      initialValues={ createItemSchema.default() }
+      initialValues={ item || createItemSchema.default() }
       validationSchema={ createItemSchema }
       onSubmit={ handleSubmit }
     >
@@ -90,11 +118,11 @@ const CreateItem: FC = () => {
           { ...props }
           error={ error }
           handleSetFile={ handleSetFile }
-          loading={ loading }
+          loading={ updateLoading }
         />
       ) }
     </Formik>
   )
 }
 
-export default CreateItem
+export default UpdateItem

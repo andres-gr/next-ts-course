@@ -34,14 +34,33 @@ export type ItemCreateInput = {
   price: Scalars['Int'],
 };
 
+export type ItemUpdateInput = {
+  title?: Maybe<Scalars['String']>,
+  description?: Maybe<Scalars['String']>,
+  image?: Maybe<Scalars['String']>,
+  largeImage?: Maybe<Scalars['String']>,
+  price?: Maybe<Scalars['Int']>,
+};
+
+export type ItemWhereUniqueInput = {
+  id?: Maybe<Scalars['ID']>,
+};
+
 export type Mutation = {
    __typename?: 'Mutation',
   createItem: Item,
+  updateItem: Item,
 };
 
 
 export type MutationCreateItemArgs = {
   data: ItemCreateInput
+};
+
+
+export type MutationUpdateItemArgs = {
+  data: ItemUpdateInput,
+  where: ItemWhereUniqueInput
 };
 
 /** An object with an ID */
@@ -53,7 +72,13 @@ export type Node = {
 export type Query = {
    __typename?: 'Query',
   items: Array<Maybe<Item>>,
+  item?: Maybe<Item>,
   users?: Maybe<Array<Maybe<User>>>,
+};
+
+
+export type QueryItemArgs = {
+  where: ItemWhereUniqueInput
 };
 
 export type User = Node & {
@@ -77,6 +102,20 @@ export type CreateItemMutation = (
   ) }
 );
 
+export type UpdateItemMutationVariables = {
+  data: ItemUpdateInput,
+  where: ItemWhereUniqueInput
+};
+
+
+export type UpdateItemMutation = (
+  { __typename?: 'Mutation' }
+  & { updateItem: (
+    { __typename?: 'Item' }
+    & ItemFragment
+  ) }
+);
+
 export type AllItemsQueryVariables = {};
 
 
@@ -86,6 +125,19 @@ export type AllItemsQuery = (
     { __typename?: 'Item' }
     & ItemFragment
   )>> }
+);
+
+export type SingleItemQueryVariables = {
+  where: ItemWhereUniqueInput
+};
+
+
+export type SingleItemQuery = (
+  { __typename?: 'Query' }
+  & { item: Maybe<(
+    { __typename?: 'Item' }
+    & ItemFragment
+  )> }
 );
 
 export type ItemFragment = (
@@ -210,6 +262,39 @@ export function useCreateItemMutation(baseOptions?: ApolloReactHooks.MutationHoo
 export type CreateItemMutationHookResult = ReturnType<typeof useCreateItemMutation>;
 export type CreateItemMutationResult = ApolloReactCommon.MutationResult<CreateItemMutation>;
 export type CreateItemMutationOptions = ApolloReactCommon.BaseMutationOptions<CreateItemMutation, CreateItemMutationVariables>;
+export const UpdateItemDocument = gql`
+    mutation UpdateItem($data: ItemUpdateInput!, $where: ItemWhereUniqueInput!) {
+  updateItem(data: $data, where: $where) {
+    ...Item
+  }
+}
+    ${ItemFragmentDoc}`;
+export type UpdateItemMutationFn = ApolloReactCommon.MutationFunction<UpdateItemMutation, UpdateItemMutationVariables>;
+
+/**
+ * __useUpdateItemMutation__
+ *
+ * To run a mutation, you first call `useUpdateItemMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateItemMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateItemMutation, { data, loading, error }] = useUpdateItemMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useUpdateItemMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<UpdateItemMutation, UpdateItemMutationVariables>) {
+        return ApolloReactHooks.useMutation<UpdateItemMutation, UpdateItemMutationVariables>(UpdateItemDocument, baseOptions);
+      }
+export type UpdateItemMutationHookResult = ReturnType<typeof useUpdateItemMutation>;
+export type UpdateItemMutationResult = ApolloReactCommon.MutationResult<UpdateItemMutation>;
+export type UpdateItemMutationOptions = ApolloReactCommon.BaseMutationOptions<UpdateItemMutation, UpdateItemMutationVariables>;
 export const AllItemsDocument = gql`
     query AllItems {
   items {
@@ -242,3 +327,36 @@ export function useAllItemsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHoo
 export type AllItemsQueryHookResult = ReturnType<typeof useAllItemsQuery>;
 export type AllItemsLazyQueryHookResult = ReturnType<typeof useAllItemsLazyQuery>;
 export type AllItemsQueryResult = ApolloReactCommon.QueryResult<AllItemsQuery, AllItemsQueryVariables>;
+export const SingleItemDocument = gql`
+    query SingleItem($where: ItemWhereUniqueInput!) {
+  item(where: $where) {
+    ...Item
+  }
+}
+    ${ItemFragmentDoc}`;
+
+/**
+ * __useSingleItemQuery__
+ *
+ * To run a query within a React component, call `useSingleItemQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSingleItemQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSingleItemQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useSingleItemQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<SingleItemQuery, SingleItemQueryVariables>) {
+        return ApolloReactHooks.useQuery<SingleItemQuery, SingleItemQueryVariables>(SingleItemDocument, baseOptions);
+      }
+export function useSingleItemLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<SingleItemQuery, SingleItemQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<SingleItemQuery, SingleItemQueryVariables>(SingleItemDocument, baseOptions);
+        }
+export type SingleItemQueryHookResult = ReturnType<typeof useSingleItemQuery>;
+export type SingleItemLazyQueryHookResult = ReturnType<typeof useSingleItemLazyQuery>;
+export type SingleItemQueryResult = ApolloReactCommon.QueryResult<SingleItemQuery, SingleItemQueryVariables>;

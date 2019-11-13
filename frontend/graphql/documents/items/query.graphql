@@ -5,3 +5,9 @@ query AllItems {
     ...Item
   }
 }
+
+query SingleItem ($where: ItemWhereUniqueInput!) {
+  item (where: $where) {
+    ...Item
+  }
+}

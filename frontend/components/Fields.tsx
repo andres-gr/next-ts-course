@@ -20,6 +20,7 @@ const Fields: FC<FieldsProps> = ({
   handleSubmit,
   isSubmitting,
   loading,
+  values,
 }: FieldsProps) => {
   const [
     {
@@ -42,6 +43,8 @@ const Fields: FC<FieldsProps> = ({
   ])
   
   const busy = loading || isSubmitting
+  
+  const image = values.image || fileUri
   
   return (
     <Form onSubmit={ handleSubmit }>
@@ -78,10 +81,10 @@ const Fields: FC<FieldsProps> = ({
             type="file"
             onChange={ onFileChange }
           />
-          { fileUri && (
+          { image && (
             <img
               alt="Upload"
-              src={ fileUri }
+              src={ image }
               width="200"
             />
           ) }

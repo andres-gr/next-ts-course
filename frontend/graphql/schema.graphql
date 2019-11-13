@@ -20,8 +20,21 @@ input ItemCreateInput {
   price: Int!
 }
 
+input ItemUpdateInput {
+  title: String
+  description: String
+  image: String
+  largeImage: String
+  price: Int
+}
+
+input ItemWhereUniqueInput {
+  id: ID
+}
+
 type Mutation {
   createItem(data: ItemCreateInput!): Item!
+  updateItem(data: ItemUpdateInput!, where: ItemWhereUniqueInput!): Item!
 }
 
 """An object with an ID"""
@@ -32,6 +45,7 @@ interface Node {
 
 type Query {
   items: [Item]!
+  item(where: ItemWhereUniqueInput!): Item
   users: [User]
 }
 

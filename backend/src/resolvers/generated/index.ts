@@ -7,6 +7,14 @@ import { Context } from "../../types";
 export namespace QueryResolvers {
   export const defaultResolvers = {};
 
+  export interface ItemWhereUniqueInput {
+    id?: string | null;
+  }
+
+  export interface ArgsItem {
+    where: ItemWhereUniqueInput;
+  }
+
   export type ItemsResolver =
     | ((
         parent: undefined,
@@ -22,6 +30,23 @@ export namespace QueryResolvers {
           ctx: Context,
           info: GraphQLResolveInfo
         ) => Array<Item | null> | Promise<Array<Item | null>>;
+      };
+
+  export type ItemResolver =
+    | ((
+        parent: undefined,
+        args: ArgsItem,
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => Item | null | Promise<Item | null>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: undefined,
+          args: ArgsItem,
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => Item | null | Promise<Item | null>;
       };
 
   export type UsersResolver =
@@ -57,6 +82,23 @@ export namespace QueryResolvers {
             ctx: Context,
             info: GraphQLResolveInfo
           ) => Array<Item | null> | Promise<Array<Item | null>>;
+        };
+
+    item:
+      | ((
+          parent: undefined,
+          args: ArgsItem,
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => Item | null | Promise<Item | null>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: undefined,
+            args: ArgsItem,
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => Item | null | Promise<Item | null>;
         };
 
     users:
@@ -364,14 +406,16 @@ export namespace ItemResolvers {
           ) => string | Promise<string>;
         };
 
-    __isTypeOf?: GraphQLIsTypeOfFn<Item, Context>;
+    __isTypeOf?: GraphQLIsTypeOfFn<Item | User, Context>;
   }
 }
 
 export namespace UserResolvers {
   export const defaultResolvers = {
     id: (parent: User) => parent.id,
-    name: (parent: User) => parent.name
+    name: (parent: User) => parent.name,
+    createdAt: (parent: User) => parent.createdAt,
+    updatedAt: (parent: User) => parent.updatedAt
   };
 
   export type IdResolver =
@@ -392,6 +436,40 @@ export namespace UserResolvers {
       };
 
   export type NameResolver =
+    | ((
+        parent: User,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => string | Promise<string>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: User,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>;
+      };
+
+  export type CreatedAtResolver =
+    | ((
+        parent: User,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => string | Promise<string>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: User,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>;
+      };
+
+  export type UpdatedAtResolver =
     | ((
         parent: User,
         args: {},
@@ -442,6 +520,42 @@ export namespace UserResolvers {
             info: GraphQLResolveInfo
           ) => string | Promise<string>;
         };
+
+    createdAt:
+      | ((
+          parent: User,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: User,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => string | Promise<string>;
+        };
+
+    updatedAt:
+      | ((
+          parent: User,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => string | Promise<string>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: User,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => string | Promise<string>;
+        };
+
+    __isTypeOf?: GraphQLIsTypeOfFn<Item | User, Context>;
   }
 }
 
@@ -456,9 +570,24 @@ export namespace MutationResolvers {
     largeImage?: string | null;
     price: number;
   }
+  export interface ItemUpdateInput {
+    title?: string | null;
+    description?: string | null;
+    image?: string | null;
+    largeImage?: string | null;
+    price?: number | null;
+  }
+  export interface ItemWhereUniqueInput {
+    id?: string | null;
+  }
 
   export interface ArgsCreateItem {
     data: ItemCreateInput;
+  }
+
+  export interface ArgsUpdateItem {
+    data: ItemUpdateInput;
+    where: ItemWhereUniqueInput;
   }
 
   export type CreateItemResolver =
@@ -473,6 +602,23 @@ export namespace MutationResolvers {
         resolve: (
           parent: undefined,
           args: ArgsCreateItem,
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => Item | Promise<Item>;
+      };
+
+  export type UpdateItemResolver =
+    | ((
+        parent: undefined,
+        args: ArgsUpdateItem,
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => Item | Promise<Item>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: undefined,
+          args: ArgsUpdateItem,
           ctx: Context,
           info: GraphQLResolveInfo
         ) => Item | Promise<Item>;
@@ -495,16 +641,33 @@ export namespace MutationResolvers {
             info: GraphQLResolveInfo
           ) => Item | Promise<Item>;
         };
+
+    updateItem:
+      | ((
+          parent: undefined,
+          args: ArgsUpdateItem,
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => Item | Promise<Item>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: undefined,
+            args: ArgsUpdateItem,
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => Item | Promise<Item>;
+        };
   }
 }
 
 export namespace NodeResolvers {
   export interface Type {
     __resolveType: (
-      value: Item,
+      value: Item | User,
       context: Context,
       info: GraphQLResolveInfo
-    ) => "Item" | Promise<"Item">;
+    ) => "Item" | "User" | Promise<"Item" | "User">;
   }
 }
 

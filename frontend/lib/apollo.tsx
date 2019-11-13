@@ -24,6 +24,7 @@ function createApolloClient (initialState = {}) {
       fetch,
     }),
     cache: new InMemoryCache().restore(initialState),
+    connectToDevTools: process.env.NODE_ENV !== 'production',
   })
 }
 

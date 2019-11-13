@@ -1,14 +1,7 @@
 import { useCallback } from 'react'
-import axios, { AxiosError } from 'axios'
+import axios from 'axios'
 import { IMAGE_UPLOAD_URL } from 'Lib/constants'
-
-type UseUploadFile = (files: FileList | null) => Promise<{
-  error?: null | AxiosError,
-  uri?: {
-    image?: string | null,
-    largeImage?: string | null,
-  },
-}>
+import { UseUploadFile } from 'Utils/types'
 
 const useUploadFile = (): UseUploadFile => {
   const handleFileUpload = useCallback<UseUploadFile>(files => {
