@@ -101,6 +101,7 @@
         {
           "alias": {
             "Components": "./components/",
+            "Documents": "./graphql/documents/",
             "GraphQL": "./graphql/generated/",
             "Hooks": "./hooks/",
             "Lib": "./lib/",

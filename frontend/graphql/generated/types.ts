@@ -49,12 +49,18 @@ export type ItemWhereUniqueInput = {
 export type Mutation = {
    __typename?: 'Mutation',
   createItem: Item,
+  deleteItem?: Maybe<Item>,
   updateItem: Item,
 };
 
 
 export type MutationCreateItemArgs = {
   data: ItemCreateInput
+};
+
+
+export type MutationDeleteItemArgs = {
+  where: ItemWhereUniqueInput
 };
 
 
@@ -100,6 +106,19 @@ export type CreateItemMutation = (
     { __typename?: 'Item' }
     & ItemFragment
   ) }
+);
+
+export type DeleteItemMutationVariables = {
+  where: ItemWhereUniqueInput
+};
+
+
+export type DeleteItemMutation = (
+  { __typename?: 'Mutation' }
+  & { deleteItem: Maybe<(
+    { __typename?: 'Item' }
+    & Pick<Item, 'id'>
+  )> }
 );
 
 export type UpdateItemMutationVariables = {
@@ -231,7 +250,7 @@ export const UserDeepNestingFragmentDoc = gql`
 }
     `;
 export const CreateItemDocument = gql`
-    mutation CreateItem($data: ItemCreateInput!) {
+    mutation CREATE_ITEM($data: ItemCreateInput!) {
   createItem(data: $data) {
     ...Item
   }
@@ -262,8 +281,40 @@ export function useCreateItemMutation(baseOptions?: ApolloReactHooks.MutationHoo
 export type CreateItemMutationHookResult = ReturnType<typeof useCreateItemMutation>;
 export type CreateItemMutationResult = ApolloReactCommon.MutationResult<CreateItemMutation>;
 export type CreateItemMutationOptions = ApolloReactCommon.BaseMutationOptions<CreateItemMutation, CreateItemMutationVariables>;
+export const DeleteItemDocument = gql`
+    mutation DELETE_ITEM($where: ItemWhereUniqueInput!) {
+  deleteItem(where: $where) {
+    id
+  }
+}
+    `;
+export type DeleteItemMutationFn = ApolloReactCommon.MutationFunction<DeleteItemMutation, DeleteItemMutationVariables>;
+
+/**
+ * __useDeleteItemMutation__
+ *
+ * To run a mutation, you first call `useDeleteItemMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteItemMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteItemMutation, { data, loading, error }] = useDeleteItemMutation({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useDeleteItemMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<DeleteItemMutation, DeleteItemMutationVariables>) {
+        return ApolloReactHooks.useMutation<DeleteItemMutation, DeleteItemMutationVariables>(DeleteItemDocument, baseOptions);
+      }
+export type DeleteItemMutationHookResult = ReturnType<typeof useDeleteItemMutation>;
+export type DeleteItemMutationResult = ApolloReactCommon.MutationResult<DeleteItemMutation>;
+export type DeleteItemMutationOptions = ApolloReactCommon.BaseMutationOptions<DeleteItemMutation, DeleteItemMutationVariables>;
 export const UpdateItemDocument = gql`
-    mutation UpdateItem($data: ItemUpdateInput!, $where: ItemWhereUniqueInput!) {
+    mutation UPDATE_ITEM($data: ItemUpdateInput!, $where: ItemWhereUniqueInput!) {
   updateItem(data: $data, where: $where) {
     ...Item
   }
@@ -296,7 +347,7 @@ export type UpdateItemMutationHookResult = ReturnType<typeof useUpdateItemMutati
 export type UpdateItemMutationResult = ApolloReactCommon.MutationResult<UpdateItemMutation>;
 export type UpdateItemMutationOptions = ApolloReactCommon.BaseMutationOptions<UpdateItemMutation, UpdateItemMutationVariables>;
 export const AllItemsDocument = gql`
-    query AllItems {
+    query ALL_ITEMS {
   items {
     ...Item
   }
@@ -328,7 +379,7 @@ export type AllItemsQueryHookResult = ReturnType<typeof useAllItemsQuery>;
 export type AllItemsLazyQueryHookResult = ReturnType<typeof useAllItemsLazyQuery>;
 export type AllItemsQueryResult = ApolloReactCommon.QueryResult<AllItemsQuery, AllItemsQueryVariables>;
 export const SingleItemDocument = gql`
-    query SingleItem($where: ItemWhereUniqueInput!) {
+    query SINGLE_ITEM($where: ItemWhereUniqueInput!) {
   item(where: $where) {
     ...Item
   }

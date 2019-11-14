@@ -14,6 +14,7 @@ import {
   HandleFileUpload,
   HandleSubmit,
 } from 'Utils/types'
+import delay from 'Lib/delay'
 
 const initState = {
   state: {
@@ -45,33 +46,30 @@ const CreateItem: FC = () => {
     setFiles(({ state }) => { state.files = readFiles })
   }, [setFiles])
   
-  const handleSubmit = useCallback<HandleSubmit>((data, { setSubmitting }) => {
-    setSubmitting(true)
-    async function body () {
-      try {
-        const {
-          error: uploadError,
-          uri,
-        } = await handleFileUpload(files)
-        if (uploadError) throw uploadError
-        const variables = {
-          data: {
-            ...data,
-            ...uri,
-          },
-        }
-        const {
-          data: {
-            createItem: { id },
-          },
-        } = await createItem({ variables })
-        router.push(`/item/${id}`)
-      } catch (e) {
-        console.warn(e)
-        setSubmitting(false)
+  const handleSubmit = useCallback<HandleSubmit>(async (data, { setSubmitting }) => {
+    try {
+      const {
+        error: uploadError,
+        uri,
+      } = await handleFileUpload(files)
+      if (uploadError) throw uploadError
+      const variables = {
+        data: {
+          ...data,
+          ...uri,
+        },
       }
+      const {
+        data: {
+          createItem: { id },
+        },
+      } = await createItem({ variables })
+      router.push(`/item/${id}`)
+      await delay(2000)
+    } catch (e) {
+      console.warn(e)
+      setSubmitting(false)
     }
-    body()
   }, [
     createItem,
     files,

@@ -13,9 +13,16 @@ generates:
       - typescript-operations
       - typescript-react-apollo
     config:
+      namingConvention:
+        typeNames: change-case#pascalCase
+        enumValues: change-case#pascalCase
+        transformUnderscore: true
       withComponent: false
       withHOC: false
       withHooks: true
+  ./frontend/global.d.ts:
+    plugins:
+      - typescript-graphql-files-modules 
 config:
   scalars:
     DateTime: Date

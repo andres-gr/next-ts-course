@@ -1,12 +1,12 @@
 #import "../../generated/app-client.fragments.graphql"
 
-query AllItems {
+query ALL_ITEMS {
   items {
     ...Item
   }
 }
 
-query SingleItem ($where: ItemWhereUniqueInput!) {
+query SINGLE_ITEM ($where: ItemWhereUniqueInput!) {
   item (where: $where) {
     ...Item
   }

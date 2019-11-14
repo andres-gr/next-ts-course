@@ -1,11 +1,11 @@
+import { ReactNode } from 'react'
 import { InferProps } from 'prop-types'
 import { NextPageContext } from 'next'
 import { ItemCreateInput } from 'GraphQL/types'
-import {
-  FormikProps,
-  FormikValues,
-} from 'formik'
+import { FormikProps } from 'formik'
 import { AxiosError } from 'axios'
+
+export type ChildrenProps = { children: ReactNode }
 
 export type Files = {
   state: {
@@ -15,7 +15,7 @@ export type Files = {
 
 export type HandleFileUpload = (files?: FileList | null) => void
 
-export type HandleSubmit = (data: ItemCreateInput, formikArgs: FormikProps<FormikValues>) => void
+export type HandleSubmit = (data: StripFields<ItemCreateInput>, formikArgs: FormikProps<StripFields<ItemCreateInput>>) => void
 
 export type InferPropTypes<
   PropTypes,
@@ -32,6 +32,8 @@ export type NextInitProps = {
     query?: NextPageContext['query']
   }
 }
+
+export type StripFields<T> = Omit<T, 'id' | '__typename'>
 
 export type UseUploadFile = (files: FileList | null) => Promise<UseUploadFileResult>
 

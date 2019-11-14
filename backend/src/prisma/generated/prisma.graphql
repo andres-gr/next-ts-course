@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/andres-garcia-rivera-9f50f8/sick-fits/dev
-# timestamp: Mon Nov 11 2019 23:10:39 GMT-0600 (Central Standard Time)
+# timestamp: Wed Nov 13 2019 19:17:24 GMT-0600 (Central Standard Time)
 
 type AggregateItem {
   count: Int!

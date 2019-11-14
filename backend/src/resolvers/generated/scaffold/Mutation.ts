@@ -8,6 +8,9 @@ export const Mutation: MutationResolvers.Type = {
   createItem: (parent, args, ctx) => {
     throw new Error("Resolver not implemented");
   },
+  deleteItem: (parent, args, ctx) => {
+    throw new Error("Resolver not implemented");
+  },
   updateItem: (parent, args, ctx) => {
     throw new Error("Resolver not implemented");
   }

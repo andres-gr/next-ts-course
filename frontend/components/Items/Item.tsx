@@ -1,9 +1,10 @@
-import { Item as ItemProps } from 'GraphQL/types'
 import Link from 'next/link'
+import { Item as ItemProps } from 'GraphQL/types'
 import ItemStyles from 'Styles/Item'
 import Title from 'Styles/Title'
 import PriceTag from 'Styles/PriceTag'
 import formatMoney from 'Lib/formatMoney'
+import DeleteItem from 'Components/DeleteItem'
 
 const Item = ({
   description,
@@ -45,7 +46,9 @@ const Item = ({
         </a>
       </Link>
       <button type="button">Add to Cart</button>
-      <button type="button">Delete</button>
+      <DeleteItem id={ id }>
+        Delete this Item
+      </DeleteItem>
     </div>
   </ItemStyles>
 )

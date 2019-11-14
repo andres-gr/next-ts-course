@@ -1,12 +1,18 @@
 #import "../../generated/app-client.fragments.graphql"
 
-mutation CreateItem ($data: ItemCreateInput!) {
+mutation CREATE_ITEM ($data: ItemCreateInput!) {
   createItem (data: $data) {
     ...Item
   }
 }
 
-mutation UpdateItem (
+mutation DELETE_ITEM ($where: ItemWhereUniqueInput!) {
+  deleteItem (where: $where) {
+    id
+  }
+}
+
+mutation UPDATE_ITEM (
   $data: ItemUpdateInput!
   $where: ItemWhereUniqueInput!
 ) {

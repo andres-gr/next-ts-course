@@ -570,6 +570,9 @@ export namespace MutationResolvers {
     largeImage?: string | null;
     price: number;
   }
+  export interface ItemWhereUniqueInput {
+    id?: string | null;
+  }
   export interface ItemUpdateInput {
     title?: string | null;
     description?: string | null;
@@ -577,12 +580,13 @@ export namespace MutationResolvers {
     largeImage?: string | null;
     price?: number | null;
   }
-  export interface ItemWhereUniqueInput {
-    id?: string | null;
-  }
 
   export interface ArgsCreateItem {
     data: ItemCreateInput;
+  }
+
+  export interface ArgsDeleteItem {
+    where: ItemWhereUniqueInput;
   }
 
   export interface ArgsUpdateItem {
@@ -605,6 +609,23 @@ export namespace MutationResolvers {
           ctx: Context,
           info: GraphQLResolveInfo
         ) => Item | Promise<Item>;
+      };
+
+  export type DeleteItemResolver =
+    | ((
+        parent: undefined,
+        args: ArgsDeleteItem,
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => Item | null | Promise<Item | null>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: undefined,
+          args: ArgsDeleteItem,
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => Item | null | Promise<Item | null>;
       };
 
   export type UpdateItemResolver =
@@ -640,6 +661,23 @@ export namespace MutationResolvers {
             ctx: Context,
             info: GraphQLResolveInfo
           ) => Item | Promise<Item>;
+        };
+
+    deleteItem:
+      | ((
+          parent: undefined,
+          args: ArgsDeleteItem,
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => Item | null | Promise<Item | null>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: undefined,
+            args: ArgsDeleteItem,
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => Item | null | Promise<Item | null>;
         };
 
     updateItem:

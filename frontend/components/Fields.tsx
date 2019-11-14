@@ -42,9 +42,9 @@ const Fields: FC<FieldsProps> = ({
     handleSetFile,
   ])
   
-  const busy = loading || isSubmitting
-  
-  const image = fileUri || values.image
+  const busy = isSubmitting || loading,
+        image = fileUri || values.image,
+        saving = !busy ? 'Submit' : 'Saving'
   
   return (
     <Form onSubmit={ handleSubmit }>
@@ -90,7 +90,7 @@ const Fields: FC<FieldsProps> = ({
           ) }
         </label>
         <button type="submit">
-          Submit
+          { saving }
         </button>
       </fieldset>
     </Form>
