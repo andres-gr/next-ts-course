@@ -7,7 +7,7 @@ class App extends NextApp<NextInitProps> {
     Component,
     ctx,
   }: AppContext) {
-    const initProps = Component.getInitialProps || (() => Promise.resolve())
+    const initProps = Component.getInitialProps || (() => Promise.resolve({}))
     const pageProps: NextInitProps['pageProps'] = await initProps(ctx)
     pageProps.query = ctx.query
     return { pageProps }
