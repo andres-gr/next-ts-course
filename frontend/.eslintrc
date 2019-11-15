@@ -238,9 +238,7 @@
       "error",
       {
         "when": "always",
-        "children": true
-      },
-      {
+        "children": true,
         "allowMultiline": true,
         "spacing": {
           "objectLiterals": "never"

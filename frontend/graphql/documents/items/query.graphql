@@ -11,3 +11,11 @@ query SINGLE_ITEM ($where: ItemWhereUniqueInput!) {
     ...Item
   }
 }
+
+query ITEMS_PAGINATION {
+  itemsConnection {
+    aggregate {
+      count
+    }
+  }
+}

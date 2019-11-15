@@ -16,6 +16,36 @@ fragment Item on Item {
   updatedAt
 }
 
+fragment ItemConnection on ItemConnection {
+  pageInfo {
+    ...PageInfoNoNesting
+  }
+  edges {
+    ...ItemEdgeNoNesting
+  }
+  aggregate {
+    ...AggregateItemNoNesting
+  }
+}
+
+fragment PageInfo on PageInfo {
+  hasNextPage
+  hasPreviousPage
+  startCursor
+  endCursor
+}
+
+fragment ItemEdge on ItemEdge {
+  node {
+    ...ItemNoNesting
+  }
+  cursor
+}
+
+fragment AggregateItem on AggregateItem {
+  count
+}
+
 fragment User on User {
   id
   name
@@ -37,6 +67,21 @@ fragment ItemNoNesting on Item {
   price
   createdAt
   updatedAt
+}
+
+fragment PageInfoNoNesting on PageInfo {
+  hasNextPage
+  hasPreviousPage
+  startCursor
+  endCursor
+}
+
+fragment ItemEdgeNoNesting on ItemEdge {
+  cursor
+}
+
+fragment AggregateItemNoNesting on AggregateItem {
+  count
 }
 
 fragment UserNoNesting on User {
@@ -62,6 +107,36 @@ fragment ItemDeepNesting on Item {
   price
   createdAt
   updatedAt
+}
+
+fragment ItemConnectionDeepNesting on ItemConnection {
+  pageInfo {
+    ...PageInfoDeepNesting
+  }
+  edges {
+    ...ItemEdgeDeepNesting
+  }
+  aggregate {
+    ...AggregateItemDeepNesting
+  }
+}
+
+fragment PageInfoDeepNesting on PageInfo {
+  hasNextPage
+  hasPreviousPage
+  startCursor
+  endCursor
+}
+
+fragment ItemEdgeDeepNesting on ItemEdge {
+  node {
+    ...ItemDeepNesting
+  }
+  cursor
+}
+
+fragment AggregateItemDeepNesting on AggregateItem {
+  count
 }
 
 fragment UserDeepNesting on User {

@@ -10,7 +10,16 @@ type Mutation {
 }
 
 type Query {
-  items: [Item]!
   item(where: ItemWhereUniqueInput!): Item
+  items: [Item]!
+  itemsConnection(
+    where: ItemWhereInput,
+    orderBy: ItemOrderByInput,
+    skip: Int,
+    after: String,
+    before: String,
+    first: Int,
+    last: Int
+  ): ItemConnection!
   users: [User]
 }

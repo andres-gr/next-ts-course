@@ -1,19 +1,19 @@
-import styled from 'styled-components';
+import styled from 'Styles/theme'
 
 const PaginationStyles = styled.div`
-  text-align: center;
+  align-content: center;
+  align-items: stretch;
+  border-radius: 10px;
+  border: 1px solid ${props => props.theme.lightGrey};
   display: inline-grid;
   grid-template-columns: repeat(4, auto);
-  align-items: stretch;
   justify-content: center;
-  align-content: center;
   margin: 2rem 0;
-  border: 1px solid ${props => props.theme.lightGrey};
-  border-radius: 10px;
+  text-align: center;
   & > * {
+    border-right: 1px solid ${props => props.theme.lightGrey};
     margin: 0;
     padding: 15px 30px;
-    border-right: 1px solid ${props => props.theme.lightGrey};
     &:last-child {
       border-right: 0;
     }
@@ -22,6 +22,6 @@ const PaginationStyles = styled.div`
     color: grey;
     pointer-events: none;
   }
-`;
+`
 
-export default PaginationStyles;
+export default PaginationStyles

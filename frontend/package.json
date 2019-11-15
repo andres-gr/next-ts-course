@@ -41,6 +41,7 @@
     "zustand": "^2.2.1"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.6.0",
     "@emotion/babel-preset-css-prop": "^10.0.23",
     "@types/nprogress": "^0.2.0",
     "@types/ramda": "^0.26.33",
@@ -95,6 +96,7 @@
       ]
     ],
     "plugins": [
+      "@babel/plugin-proposal-optional-chaining",
       "import-graphql",
       [
         "module-resolver",

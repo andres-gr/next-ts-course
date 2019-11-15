@@ -1,9 +1,8 @@
 import { NextPage } from 'next'
+import SingleItem from 'Components/SingleItem'
+import { NextInitProps } from 'Utils/types'
+import withApollo from 'Lib/apollo'
 
-const Item: NextPage = () => (
-  <div>
-    <p>Single Item</p>
-  </div>
-)
+const Item: NextPage = ({ query }: NextInitProps['pageProps']) => <SingleItem id={ query.id } />
 
-export default Item
+export default withApollo(Item)
