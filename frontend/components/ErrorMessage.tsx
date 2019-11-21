@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+import { FC } from 'react'
 import { ApolloError } from 'apollo-client'
 import styled from 'Styles/theme'
 
@@ -17,9 +18,9 @@ const ErrorStyles = styled.div`
   }
 `
 
-export type DisplayErrorProps = { error: ApolloError | undefined }
+export type DisplayErrorProps = { error?: ApolloError }
 
-const DisplayError = ({ error }: DisplayErrorProps) => {
+const DisplayError: FC<DisplayErrorProps> = ({ error }: DisplayErrorProps) => {
   if (!error || !error.message) return null
   console.warn(error)
   return (

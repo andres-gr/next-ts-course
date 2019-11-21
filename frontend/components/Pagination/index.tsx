@@ -30,13 +30,14 @@ const Pagination = () => {
         </title>
       </Head>
       <Link
-        prefetch
-        href={{
-          pathname : '/items',
-          query    : {
-            page: page - 1,
-          },
-        }}
+        href={
+          {
+            pathname : '/items',
+            query    : {
+              page: page - 1,
+            },
+          }
+        }
       >
         <a
           aria-disabled={ page <= 1 }
@@ -52,13 +53,14 @@ const Pagination = () => {
         { count } Items Total
       </p>
       <Link
-        prefetch
-        href={{
-          pathname : '/items',
-          query    : {
-            page: page + 1,
-          },
-        }}
+        href={
+          {
+            pathname : '/items',
+            query    : {
+              page: page + 1,
+            },
+          }
+        }
       >
         <a
           aria-disabled={ page >= pages }

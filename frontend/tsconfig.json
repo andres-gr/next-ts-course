@@ -51,7 +51,7 @@
     "node_modules"
   ],
   "include": [
-    "next-env.d.ts",
+    "**/*.d.ts",
     "**/*.ts",
     "**/*.tsx",
     "**/*.graphql"

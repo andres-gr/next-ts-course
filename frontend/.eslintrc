@@ -245,6 +245,13 @@
         }
       }
     ],
+    "react/jsx-curly-newline": [
+      "error",
+      {
+        "multiline": "require",
+        "singleline": "forbid"
+      }
+    ],
     "react/forbid-prop-types": "off",
     "react/jsx-one-expression-per-line": "off",
     "react/jsx-wrap-multilines": [

@@ -1,3 +1,4 @@
+import { FC } from 'react'
 import styled from 'Styles/theme'
 import Item from 'Components/Items/Item'
 import { Item as ItemProps } from 'GraphQL/types'
@@ -14,14 +15,16 @@ const StyledItemsList = styled.div`
   max-width: ${props => props.theme.maxWidth};
 `
 
-const ItemsList = ({ items }: ItemsListProps) => (
+const ItemsList: FC<ItemsListProps> = ({ items }: ItemsListProps) => (
   <StyledItemsList>
-    { items.map(item => (
-      <Item
-        key={ item.id }
-        { ...item }
-      />
-    )) }
+    {
+      items.map(item => (
+        <Item
+          key={ item.id }
+          { ...item }
+        />
+      ))
+    }
   </StyledItemsList>
 )
 

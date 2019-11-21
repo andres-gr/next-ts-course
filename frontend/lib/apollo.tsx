@@ -10,6 +10,8 @@ import { APOLLO_URL } from 'Lib/constants'
 
 let apolloClient = null
 
+export const cache = new InMemoryCache()
+
 /**
  * Creates and configures the ApolloClient
  * @param  {Object} [initialState={}]
@@ -23,7 +25,7 @@ function createApolloClient (initialState = {}) {
       credentials : 'same-origin', // Additional fetch() options like `credentials` or `headers`
       fetch,
     }),
-    cache: new InMemoryCache().restore(initialState),
+    cache: cache.restore(initialState),
     connectToDevTools: process.env.NODE_ENV !== 'production',
   })
 }

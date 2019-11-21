@@ -1,5 +1,8 @@
 /* eslint-disable no-alert */
-import { useCallback } from 'react'
+import {
+  FC,
+  useCallback,
+} from 'react'
 import { ChildrenProps } from 'Utils/types'
 import {
   Item,
@@ -8,12 +11,12 @@ import {
 import { ALL_ITEMS } from 'Documents/items/query.graphql'
 
 type DeleteItemProps = {
-  id: string
+  id?: string
 } & ChildrenProps
 
 type CacheItems = { items: Item[] }
 
-const DeleteItem = ({
+const DeleteItem: FC<DeleteItemProps> = ({
   children,
   id,
 }: DeleteItemProps) => {

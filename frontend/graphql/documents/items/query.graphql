@@ -1,7 +1,16 @@
 #import "../../generated/app-client.fragments.graphql"
 
-query ALL_ITEMS {
-  items {
+query ALL_ITEMS (
+  $where: ItemWhereInput,
+  $skip: Int,
+  $first: Int
+) {
+  items (
+    where: $where,
+    orderBy: createdAt_DESC,
+    skip: $skip,
+    first: $first
+  ) {
     ...Item
   }
 }

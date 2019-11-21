@@ -1,3 +1,4 @@
+import { FC } from 'react'
 import Head from 'next/head'
 import { useSingleItemQuery } from 'GraphQL/types'
 import DisplayError from 'Components/ErrorMessage'
@@ -26,7 +27,7 @@ const SingleItemStyles = styled.div`
   }
 `
 
-const SingleItem = ({ id }: SingleItemProps) => {
+const SingleItem: FC<SingleItemProps> = ({ id }: SingleItemProps) => {
   const {
     data,
     error,

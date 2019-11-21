@@ -14,7 +14,6 @@ import {
   HandleFileUpload,
   HandleSubmit,
 } from 'Utils/types'
-import delay from 'Lib/delay'
 
 const initState = {
   state: {
@@ -64,8 +63,10 @@ const CreateItem: FC = () => {
           createItem: { id },
         },
       } = await createItem({ variables })
-      router.push(`/item/${id}`)
-      await delay(2000)
+      await router.push(
+        '/item/[id]',
+        `/item/${id}`,
+      )
     } catch (e) {
       console.warn(e)
       setSubmitting(false)
@@ -83,14 +84,16 @@ const CreateItem: FC = () => {
       validationSchema={ createItemSchema }
       onSubmit={ handleSubmit }
     >
-      { props => (
-        <Fields
-          { ...props }
-          error={ error }
-          handleSetFile={ handleSetFile }
-          loading={ loading }
-        />
-      ) }
+      {
+        props => (
+          <Fields
+            { ...props }
+            error={ error }
+            handleSetFile={ handleSetFile }
+            loading={ loading }
+          />
+        )
+      }
     </Formik>
   )
 }

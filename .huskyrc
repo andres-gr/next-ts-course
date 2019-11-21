@@ -1,6 +1,6 @@
 {
   "hooks": {
-    "pre-commit": "run-s lint:back lint:front",
-    "pre-push": "run-s lint:back lint:front"
+    "pre-commit": "run-s lint:back lint:front typecheck:front typecheck:back",
+    "pre-push": "run-s lint:back lint:front typecheck:front typecheck:back"
   }
 }

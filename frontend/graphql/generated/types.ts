@@ -334,6 +334,17 @@ export type QueryItemArgs = {
 };
 
 
+export type QueryItemsArgs = {
+  where?: Maybe<ItemWhereInput>,
+  orderBy?: Maybe<ItemOrderByInput>,
+  skip?: Maybe<Scalars['Int']>,
+  after?: Maybe<Scalars['String']>,
+  before?: Maybe<Scalars['String']>,
+  first?: Maybe<Scalars['Int']>,
+  last?: Maybe<Scalars['Int']>
+};
+
+
 export type QueryItemsConnectionArgs = {
   where?: Maybe<ItemWhereInput>,
   orderBy?: Maybe<ItemOrderByInput>,
@@ -392,7 +403,11 @@ export type UpdateItemMutation = (
   ) }
 );
 
-export type AllItemsQueryVariables = {};
+export type AllItemsQueryVariables = {
+  where?: Maybe<ItemWhereInput>,
+  skip?: Maybe<Scalars['Int']>,
+  first?: Maybe<Scalars['Int']>
+};
 
 
 export type AllItemsQuery = (
@@ -789,8 +804,8 @@ export type UpdateItemMutationHookResult = ReturnType<typeof useUpdateItemMutati
 export type UpdateItemMutationResult = ApolloReactCommon.MutationResult<UpdateItemMutation>;
 export type UpdateItemMutationOptions = ApolloReactCommon.BaseMutationOptions<UpdateItemMutation, UpdateItemMutationVariables>;
 export const AllItemsDocument = gql`
-    query ALL_ITEMS {
-  items {
+    query ALL_ITEMS($where: ItemWhereInput, $skip: Int, $first: Int) {
+  items(where: $where, orderBy: createdAt_DESC, skip: $skip, first: $first) {
     ...Item
   }
 }
@@ -808,6 +823,9 @@ export const AllItemsDocument = gql`
  * @example
  * const { data, loading, error } = useAllItemsQuery({
  *   variables: {
+ *      where: // value for 'where'
+ *      skip: // value for 'skip'
+ *      first: // value for 'first'
  *   },
  * });
  */

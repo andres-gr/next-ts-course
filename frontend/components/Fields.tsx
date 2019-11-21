@@ -81,13 +81,15 @@ const Fields: FC<FieldsProps> = ({
             type="file"
             onChange={ onFileChange }
           />
-          { image && (
-            <img
-              alt="Upload"
-              src={ image }
-              width="200"
-            />
-          ) }
+          {
+            image && (
+              <img
+                alt="Upload"
+                src={ image }
+                width="200"
+              />
+            )
+          }
         </label>
         <button type="submit">
           { saving }

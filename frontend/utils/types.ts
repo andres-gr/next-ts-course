@@ -1,6 +1,5 @@
 import { ReactNode } from 'react'
 import { InferProps } from 'prop-types'
-import { NextPageContext } from 'next'
 import { ItemCreateInput } from 'GraphQL/types'
 import { FormikProps } from 'formik'
 import { AxiosError } from 'axios'
@@ -27,9 +26,9 @@ export type InferPropTypes<
     : Props[Key]
 }
 
-export type NextInitProps = {
-  pageProps: {
-    query?: NextPageContext['query']
+export type PageProps = {
+  query?: {
+    [x: string]: string
   }
 }
 

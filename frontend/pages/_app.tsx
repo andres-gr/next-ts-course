@@ -1,6 +1,15 @@
 import NextApp, { AppContext } from 'next/app'
 import Page from 'Components/Page'
-import { NextInitProps } from 'Utils/types'
+
+type InitPageProps = {
+  query?: {
+    [x: string]: string | string[]
+  }
+}
+
+type NextInitProps = {
+  pageProps: InitPageProps
+}
 
 class App extends NextApp<NextInitProps> {
   static async getInitialProps ({
@@ -8,7 +17,7 @@ class App extends NextApp<NextInitProps> {
     ctx,
   }: AppContext) {
     const initProps = Component.getInitialProps || (() => Promise.resolve({}))
-    const pageProps: NextInitProps['pageProps'] = await initProps(ctx)
+    const pageProps: InitPageProps = await initProps(ctx)
     pageProps.query = ctx.query
     return { pageProps }
   }

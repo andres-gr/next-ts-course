@@ -139,6 +139,16 @@ export namespace QueryResolvers {
     where: ItemWhereUniqueInput;
   }
 
+  export interface ArgsItems {
+    where?: ItemWhereInput | null;
+    orderBy?: ItemOrderByInput | null;
+    skip?: number | null;
+    after?: string | null;
+    before?: string | null;
+    first?: number | null;
+    last?: number | null;
+  }
+
   export interface ArgsItemsConnection {
     where?: ItemWhereInput | null;
     orderBy?: ItemOrderByInput | null;
@@ -169,7 +179,7 @@ export namespace QueryResolvers {
   export type ItemsResolver =
     | ((
         parent: undefined,
-        args: {},
+        args: ArgsItems,
         ctx: Context,
         info: GraphQLResolveInfo
       ) => Array<Item | null> | Promise<Array<Item | null>>)
@@ -177,7 +187,7 @@ export namespace QueryResolvers {
         fragment: string;
         resolve: (
           parent: undefined,
-          args: {},
+          args: ArgsItems,
           ctx: Context,
           info: GraphQLResolveInfo
         ) => Array<Item | null> | Promise<Array<Item | null>>;
@@ -238,7 +248,7 @@ export namespace QueryResolvers {
     items:
       | ((
           parent: undefined,
-          args: {},
+          args: ArgsItems,
           ctx: Context,
           info: GraphQLResolveInfo
         ) => Array<Item | null> | Promise<Array<Item | null>>)
@@ -246,7 +256,7 @@ export namespace QueryResolvers {
           fragment: string;
           resolve: (
             parent: undefined,
-            args: {},
+            args: ArgsItems,
             ctx: Context,
             info: GraphQLResolveInfo
           ) => Array<Item | null> | Promise<Array<Item | null>>;

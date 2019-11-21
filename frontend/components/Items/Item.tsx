@@ -1,3 +1,4 @@
+import { FC } from 'react'
 import Link from 'next/link'
 import { Item as ItemProps } from 'GraphQL/types'
 import ItemStyles from 'Styles/Item'
@@ -6,7 +7,7 @@ import PriceTag from 'Styles/PriceTag'
 import formatMoney from 'Lib/formatMoney'
 import DeleteItem from 'Components/DeleteItem'
 
-const Item = ({
+const Item: FC<ItemProps> = ({
   description,
   id,
   image,
@@ -14,12 +15,14 @@ const Item = ({
   title,
 }: ItemProps) => (
   <ItemStyles>
-    { image && (
-      <img
-        alt={ title }
-        src={ image }
-      />
-    ) }
+    {
+      image && (
+        <img
+          alt={ title }
+          src={ image }
+        />
+      )
+    }
     <Title>
       <Link
         as={ `/item/${id}` }

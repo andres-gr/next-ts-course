@@ -18,7 +18,6 @@ import {
   HandleSubmit,
   UseUploadFileResult,
 } from 'Utils/types'
-import stripApollo from 'Lib/stripApollo'
 
 type Where = { id: string }
 
@@ -79,16 +78,15 @@ const UpdateItem: FC = () => {
           if (uploadError) throw uploadError
           uri = uriData
         }
-        const itemData = stripApollo(data)
         const variables = {
           data: {
-            ...itemData,
+            ...data,
             ...uri,
           },
           where: { id } as Where,
         }
         await updateItem({ variables })
-        router.push('/')
+        await router.push('/')
       } catch (e) {
         console.warn(e)
         setSubmitting(false)
@@ -113,14 +111,16 @@ const UpdateItem: FC = () => {
       validationSchema={ createItemSchema }
       onSubmit={ handleSubmit }
     >
-      { props => (
-        <Fields
-          { ...props }
-          error={ error }
-          handleSetFile={ handleSetFile }
-          loading={ updateLoading }
-        />
-      ) }
+      {
+        props => (
+          <Fields
+            { ...props }
+            error={ error }
+            handleSetFile={ handleSetFile }
+            loading={ updateLoading }
+          />
+        )
+      }
     </Formik>
   )
 }
