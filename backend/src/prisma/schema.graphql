@@ -1,5 +1,14 @@
 # import * from './generated/prisma.graphql'
 
+type User {
+  id: String!
+  name: String!
+  email: String!
+  resetToken: String
+  resetTokenExpiry: Float
+  permissions: [Permission]
+}
+
 type Mutation {
   createItem(data: ItemCreateInput!): Item!
   deleteItem(where: ItemWhereUniqueInput!): Item
@@ -7,6 +16,12 @@ type Mutation {
     data: ItemUpdateInput!,
     where: ItemWhereUniqueInput!
   ): Item!
+  
+  signup(
+    email: String!,
+    name: String!,
+    password: String!
+  ): User!
 }
 
 type Query {

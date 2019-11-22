@@ -5,7 +5,7 @@ const Query: QueryResolvers.Type = {
   item            : forwardTo('prisma'),
   items           : forwardTo('prisma'),
   itemsConnection : forwardTo('prisma'),
-  users           : async (parent, args, { prismaClient }) => prismaClient.users(),
+  users           : async (_parent, _args, { prismaClient }) => prismaClient.users(),
 }
 
 export default Query

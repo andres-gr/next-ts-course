@@ -24,7 +24,7 @@
     "prisma:deploy": "cd backend/src/prisma && prisma deploy -e ../../../.env && cd ../../..",
     "client:codegen:types": "graphql-codegen -r dotenv/config",
     "client:codegen:fragments": "cd frontend && ../postinstallclient",
-    "client:codegen": "run-s client:codegen:types client:codegen:fragments",
+    "client:codegen": "run-s client:codegen:fragments client:codegen:types",
     "typecheck:front": "tsc --p ./frontend/tsconfig.json",
     "typecheck:back": "tsc --p ./backend/tsconfig.json"
   },

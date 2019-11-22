@@ -15,7 +15,7 @@ generates:
     config:
       namingConvention:
         typeNames: change-case#pascalCase
-        enumValues: change-case#pascalCase
+        enumValues: keep
         transformUnderscore: true
       withComponent: false
       withHOC: false

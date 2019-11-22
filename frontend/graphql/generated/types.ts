@@ -59,22 +59,22 @@ export type ItemEdge = {
 };
 
 export enum ItemOrderByInput {
-  IdAsc = 'id_ASC',
-  IdDesc = 'id_DESC',
-  TitleAsc = 'title_ASC',
-  TitleDesc = 'title_DESC',
-  DescriptionAsc = 'description_ASC',
-  DescriptionDesc = 'description_DESC',
-  ImageAsc = 'image_ASC',
-  ImageDesc = 'image_DESC',
-  LargeImageAsc = 'largeImage_ASC',
-  LargeImageDesc = 'largeImage_DESC',
-  PriceAsc = 'price_ASC',
-  PriceDesc = 'price_DESC',
-  CreatedAtAsc = 'createdAt_ASC',
-  CreatedAtDesc = 'createdAt_DESC',
-  UpdatedAtAsc = 'updatedAt_ASC',
-  UpdatedAtDesc = 'updatedAt_DESC'
+  id_ASC = 'id_ASC',
+  id_DESC = 'id_DESC',
+  title_ASC = 'title_ASC',
+  title_DESC = 'title_DESC',
+  description_ASC = 'description_ASC',
+  description_DESC = 'description_DESC',
+  image_ASC = 'image_ASC',
+  image_DESC = 'image_DESC',
+  largeImage_ASC = 'largeImage_ASC',
+  largeImage_DESC = 'largeImage_DESC',
+  price_ASC = 'price_ASC',
+  price_DESC = 'price_DESC',
+  createdAt_ASC = 'createdAt_ASC',
+  createdAt_DESC = 'createdAt_DESC',
+  updatedAt_ASC = 'updatedAt_ASC',
+  updatedAt_DESC = 'updatedAt_DESC'
 }
 
 export type ItemUpdateInput = {
@@ -283,6 +283,7 @@ export type Mutation = {
   createItem: Item,
   deleteItem?: Maybe<Item>,
   updateItem: Item,
+  signup: User,
 };
 
 
@@ -299,6 +300,13 @@ export type MutationDeleteItemArgs = {
 export type MutationUpdateItemArgs = {
   data: ItemUpdateInput,
   where: ItemWhereUniqueInput
+};
+
+
+export type MutationSignupArgs = {
+  email: Scalars['String'],
+  name: Scalars['String'],
+  password: Scalars['String']
 };
 
 /** An object with an ID */
@@ -319,6 +327,15 @@ export type PageInfo = {
   /** When paginating forwards, the cursor to continue. */
   endCursor?: Maybe<Scalars['String']>,
 };
+
+export enum Permission {
+  ADMIN = 'ADMIN',
+  ITEM_CREATE = 'ITEM_CREATE',
+  ITEM_DELETE = 'ITEM_DELETE',
+  ITEM_UPDATE = 'ITEM_UPDATE',
+  PEMISSION_UPDATE = 'PEMISSION_UPDATE',
+  USER = 'USER'
+}
 
 export type Query = {
    __typename?: 'Query',
@@ -355,12 +372,14 @@ export type QueryItemsConnectionArgs = {
   last?: Maybe<Scalars['Int']>
 };
 
-export type User = Node & {
+export type User = {
    __typename?: 'User',
-  id: Scalars['ID'],
+  id: Scalars['String'],
   name: Scalars['String'],
-  createdAt: Scalars['DateTime'],
-  updatedAt: Scalars['DateTime'],
+  email: Scalars['String'],
+  resetToken?: Maybe<Scalars['String']>,
+  resetTokenExpiry?: Maybe<Scalars['Float']>,
+  permissions?: Maybe<Array<Maybe<Permission>>>,
 };
 
 export type CreateItemMutationVariables = {
@@ -485,7 +504,7 @@ export type AggregateItemFragment = (
 
 export type UserFragment = (
   { __typename?: 'User' }
-  & Pick<User, 'id' | 'name' | 'createdAt' | 'updatedAt'>
+  & Pick<User, 'id' | 'name' | 'email' | 'resetToken' | 'resetTokenExpiry' | 'permissions'>
 );
 
 export type ItemNoNestingFragment = (
@@ -510,7 +529,7 @@ export type AggregateItemNoNestingFragment = (
 
 export type UserNoNestingFragment = (
   { __typename?: 'User' }
-  & Pick<User, 'id' | 'name' | 'createdAt' | 'updatedAt'>
+  & Pick<User, 'id' | 'name' | 'email' | 'resetToken' | 'resetTokenExpiry' | 'permissions'>
 );
 
 export type ItemDeepNestingFragment = (
@@ -553,7 +572,7 @@ export type AggregateItemDeepNestingFragment = (
 
 export type UserDeepNestingFragment = (
   { __typename?: 'User' }
-  & Pick<User, 'id' | 'name' | 'createdAt' | 'updatedAt'>
+  & Pick<User, 'id' | 'name' | 'email' | 'resetToken' | 'resetTokenExpiry' | 'permissions'>
 );
 
 export const ItemFragmentDoc = gql`
@@ -638,16 +657,20 @@ export const UserFragmentDoc = gql`
     fragment User on User {
   id
   name
-  createdAt
-  updatedAt
+  email
+  resetToken
+  resetTokenExpiry
+  permissions
 }
     `;
 export const UserNoNestingFragmentDoc = gql`
     fragment UserNoNesting on User {
   id
   name
-  createdAt
-  updatedAt
+  email
+  resetToken
+  resetTokenExpiry
+  permissions
 }
     `;
 export const PageInfoDeepNestingFragmentDoc = gql`
@@ -702,8 +725,10 @@ export const UserDeepNestingFragmentDoc = gql`
     fragment UserDeepNesting on User {
   id
   name
-  createdAt
-  updatedAt
+  email
+  resetToken
+  resetTokenExpiry
+  permissions
 }
     `;
 export const CreateItemDocument = gql`

@@ -526,6 +526,15 @@ type PageInfo {
   endCursor: String
 }
 
+enum Permission {
+  ADMIN
+  ITEM_CREATE
+  ITEM_DELETE
+  ITEM_UPDATE
+  PEMISSION_UPDATE
+  USER
+}
+
 type Query {
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   items(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Item]!
@@ -549,6 +558,11 @@ type Subscription {
 type User implements Node {
   id: ID!
   name: String!
+  email: String!
+  password: String!
+  resetToken: String
+  resetTokenExpiry: Float
+  permissions: [Permission!]!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -566,6 +580,15 @@ type UserConnection {
 input UserCreateInput {
   id: ID
   name: String!
+  email: String!
+  password: String!
+  resetToken: String
+  resetTokenExpiry: Float
+  permissions: UserCreatepermissionsInput
+}
+
+input UserCreatepermissionsInput {
+  set: [Permission!]
 }
 
 """An edge in a connection."""
@@ -582,6 +605,14 @@ enum UserOrderByInput {
   id_DESC
   name_ASC
   name_DESC
+  email_ASC
+  email_DESC
+  password_ASC
+  password_DESC
+  resetToken_ASC
+  resetToken_DESC
+  resetTokenExpiry_ASC
+  resetTokenExpiry_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -591,6 +622,11 @@ enum UserOrderByInput {
 type UserPreviousValues {
   id: ID!
   name: String!
+  email: String!
+  password: String!
+  resetToken: String
+  resetTokenExpiry: Float
+  permissions: [Permission!]!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -634,10 +670,24 @@ input UserSubscriptionWhereInput {
 
 input UserUpdateInput {
   name: String
+  email: String
+  password: String
+  resetToken: String
+  resetTokenExpiry: Float
+  permissions: UserUpdatepermissionsInput
 }
 
 input UserUpdateManyMutationInput {
   name: String
+  email: String
+  password: String
+  resetToken: String
+  resetTokenExpiry: Float
+  permissions: UserUpdatepermissionsInput
+}
+
+input UserUpdatepermissionsInput {
+  set: [Permission!]
 }
 
 input UserWhereInput {
@@ -729,6 +779,148 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
+  email: String
+
+  """All values that are not equal to given value."""
+  email_not: String
+
+  """All values that are contained in given list."""
+  email_in: [String!]
+
+  """All values that are not contained in given list."""
+  email_not_in: [String!]
+
+  """All values less than the given value."""
+  email_lt: String
+
+  """All values less than or equal the given value."""
+  email_lte: String
+
+  """All values greater than the given value."""
+  email_gt: String
+
+  """All values greater than or equal the given value."""
+  email_gte: String
+
+  """All values containing the given string."""
+  email_contains: String
+
+  """All values not containing the given string."""
+  email_not_contains: String
+
+  """All values starting with the given string."""
+  email_starts_with: String
+
+  """All values not starting with the given string."""
+  email_not_starts_with: String
+
+  """All values ending with the given string."""
+  email_ends_with: String
+
+  """All values not ending with the given string."""
+  email_not_ends_with: String
+  password: String
+
+  """All values that are not equal to given value."""
+  password_not: String
+
+  """All values that are contained in given list."""
+  password_in: [String!]
+
+  """All values that are not contained in given list."""
+  password_not_in: [String!]
+
+  """All values less than the given value."""
+  password_lt: String
+
+  """All values less than or equal the given value."""
+  password_lte: String
+
+  """All values greater than the given value."""
+  password_gt: String
+
+  """All values greater than or equal the given value."""
+  password_gte: String
+
+  """All values containing the given string."""
+  password_contains: String
+
+  """All values not containing the given string."""
+  password_not_contains: String
+
+  """All values starting with the given string."""
+  password_starts_with: String
+
+  """All values not starting with the given string."""
+  password_not_starts_with: String
+
+  """All values ending with the given string."""
+  password_ends_with: String
+
+  """All values not ending with the given string."""
+  password_not_ends_with: String
+  resetToken: String
+
+  """All values that are not equal to given value."""
+  resetToken_not: String
+
+  """All values that are contained in given list."""
+  resetToken_in: [String!]
+
+  """All values that are not contained in given list."""
+  resetToken_not_in: [String!]
+
+  """All values less than the given value."""
+  resetToken_lt: String
+
+  """All values less than or equal the given value."""
+  resetToken_lte: String
+
+  """All values greater than the given value."""
+  resetToken_gt: String
+
+  """All values greater than or equal the given value."""
+  resetToken_gte: String
+
+  """All values containing the given string."""
+  resetToken_contains: String
+
+  """All values not containing the given string."""
+  resetToken_not_contains: String
+
+  """All values starting with the given string."""
+  resetToken_starts_with: String
+
+  """All values not starting with the given string."""
+  resetToken_not_starts_with: String
+
+  """All values ending with the given string."""
+  resetToken_ends_with: String
+
+  """All values not ending with the given string."""
+  resetToken_not_ends_with: String
+  resetTokenExpiry: Float
+
+  """All values that are not equal to given value."""
+  resetTokenExpiry_not: Float
+
+  """All values that are contained in given list."""
+  resetTokenExpiry_in: [Float!]
+
+  """All values that are not contained in given list."""
+  resetTokenExpiry_not_in: [Float!]
+
+  """All values less than the given value."""
+  resetTokenExpiry_lt: Float
+
+  """All values less than or equal the given value."""
+  resetTokenExpiry_lte: Float
+
+  """All values greater than the given value."""
+  resetTokenExpiry_gt: Float
+
+  """All values greater than or equal the given value."""
+  resetTokenExpiry_gte: Float
   createdAt: DateTime
 
   """All values that are not equal to given value."""
@@ -777,6 +969,7 @@ input UserWhereInput {
 
 input UserWhereUniqueInput {
   id: ID
+  email: String
 }
 `
 
@@ -807,10 +1000,25 @@ export type MutationType =   'CREATED' |
   'UPDATED' |
   'DELETED'
 
+export type Permission =   'ADMIN' |
+  'ITEM_CREATE' |
+  'ITEM_DELETE' |
+  'ITEM_UPDATE' |
+  'PEMISSION_UPDATE' |
+  'USER'
+
 export type UserOrderByInput =   'id_ASC' |
   'id_DESC' |
   'name_ASC' |
   'name_DESC' |
+  'email_ASC' |
+  'email_DESC' |
+  'password_ASC' |
+  'password_DESC' |
+  'resetToken_ASC' |
+  'resetToken_DESC' |
+  'resetTokenExpiry_ASC' |
+  'resetTokenExpiry_DESC' |
   'createdAt_ASC' |
   'createdAt_DESC' |
   'updatedAt_ASC' |
@@ -959,6 +1167,15 @@ export interface ItemWhereUniqueInput {
 export interface UserCreateInput {
   id?: ID_Input | null
   name: String
+  email: String
+  password: String
+  resetToken?: String | null
+  resetTokenExpiry?: Float | null
+  permissions?: UserCreatepermissionsInput | null
+}
+
+export interface UserCreatepermissionsInput {
+  set?: Permission[] | Permission | null
 }
 
 export interface UserSubscriptionWhereInput {
@@ -974,10 +1191,24 @@ export interface UserSubscriptionWhereInput {
 
 export interface UserUpdateInput {
   name?: String | null
+  email?: String | null
+  password?: String | null
+  resetToken?: String | null
+  resetTokenExpiry?: Float | null
+  permissions?: UserUpdatepermissionsInput | null
 }
 
 export interface UserUpdateManyMutationInput {
   name?: String | null
+  email?: String | null
+  password?: String | null
+  resetToken?: String | null
+  resetTokenExpiry?: Float | null
+  permissions?: UserUpdatepermissionsInput | null
+}
+
+export interface UserUpdatepermissionsInput {
+  set?: Permission[] | Permission | null
 }
 
 export interface UserWhereInput {
@@ -1012,6 +1243,56 @@ export interface UserWhereInput {
   name_not_starts_with?: String | null
   name_ends_with?: String | null
   name_not_ends_with?: String | null
+  email?: String | null
+  email_not?: String | null
+  email_in?: String[] | String | null
+  email_not_in?: String[] | String | null
+  email_lt?: String | null
+  email_lte?: String | null
+  email_gt?: String | null
+  email_gte?: String | null
+  email_contains?: String | null
+  email_not_contains?: String | null
+  email_starts_with?: String | null
+  email_not_starts_with?: String | null
+  email_ends_with?: String | null
+  email_not_ends_with?: String | null
+  password?: String | null
+  password_not?: String | null
+  password_in?: String[] | String | null
+  password_not_in?: String[] | String | null
+  password_lt?: String | null
+  password_lte?: String | null
+  password_gt?: String | null
+  password_gte?: String | null
+  password_contains?: String | null
+  password_not_contains?: String | null
+  password_starts_with?: String | null
+  password_not_starts_with?: String | null
+  password_ends_with?: String | null
+  password_not_ends_with?: String | null
+  resetToken?: String | null
+  resetToken_not?: String | null
+  resetToken_in?: String[] | String | null
+  resetToken_not_in?: String[] | String | null
+  resetToken_lt?: String | null
+  resetToken_lte?: String | null
+  resetToken_gt?: String | null
+  resetToken_gte?: String | null
+  resetToken_contains?: String | null
+  resetToken_not_contains?: String | null
+  resetToken_starts_with?: String | null
+  resetToken_not_starts_with?: String | null
+  resetToken_ends_with?: String | null
+  resetToken_not_ends_with?: String | null
+  resetTokenExpiry?: Float | null
+  resetTokenExpiry_not?: Float | null
+  resetTokenExpiry_in?: Float[] | Float | null
+  resetTokenExpiry_not_in?: Float[] | Float | null
+  resetTokenExpiry_lt?: Float | null
+  resetTokenExpiry_lte?: Float | null
+  resetTokenExpiry_gt?: Float | null
+  resetTokenExpiry_gte?: Float | null
   createdAt?: DateTime | null
   createdAt_not?: DateTime | null
   createdAt_in?: DateTime[] | DateTime | null
@@ -1032,6 +1313,7 @@ export interface UserWhereInput {
 
 export interface UserWhereUniqueInput {
   id?: ID_Input | null
+  email?: String | null
 }
 
 /*
@@ -1116,6 +1398,11 @@ export interface PageInfo {
 export interface User extends Node {
   id: ID_Output
   name: String
+  email: String
+  password: String
+  resetToken?: String | null
+  resetTokenExpiry?: Float | null
+  permissions: Array<Permission>
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -1142,6 +1429,11 @@ export interface UserEdge {
 export interface UserPreviousValues {
   id: ID_Output
   name: String
+  email: String
+  password: String
+  resetToken?: String | null
+  resetTokenExpiry?: Float | null
+  permissions: Array<Permission>
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -1159,6 +1451,11 @@ The `Boolean` scalar type represents `true` or `false`.
 export type Boolean = boolean
 
 export type DateTime = Date | string
+
+/*
+The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
+*/
+export type Float = number
 
 /*
 The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.

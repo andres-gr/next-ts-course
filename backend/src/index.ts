@@ -1,7 +1,10 @@
+import cookieParser from 'cookie-parser'
 import 'Startup/dotenv'
 import create from './server'
 
 const server = create()
+
+server.express.use(cookieParser())
 
 server.start(
   {

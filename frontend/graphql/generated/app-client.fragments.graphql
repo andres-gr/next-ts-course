@@ -49,8 +49,10 @@ fragment AggregateItem on AggregateItem {
 fragment User on User {
   id
   name
-  createdAt
-  updatedAt
+  email
+  resetToken
+  resetTokenExpiry
+  permissions
 }
 
 
@@ -87,8 +89,10 @@ fragment AggregateItemNoNesting on AggregateItem {
 fragment UserNoNesting on User {
   id
   name
-  createdAt
-  updatedAt
+  email
+  resetToken
+  resetTokenExpiry
+  permissions
 }
 
 
@@ -142,7 +146,9 @@ fragment AggregateItemDeepNesting on AggregateItem {
 fragment UserDeepNesting on User {
   id
   name
-  createdAt
-  updatedAt
+  email
+  resetToken
+  resetTokenExpiry
+  permissions
 }
 

@@ -355,6 +355,7 @@ type Mutation {
   createItem(data: ItemCreateInput!): Item!
   deleteItem(where: ItemWhereUniqueInput!): Item
   updateItem(data: ItemUpdateInput!, where: ItemWhereUniqueInput!): Item!
+  signup(email: String!, name: String!, password: String!): User!
 }
 
 """An object with an ID"""
@@ -378,6 +379,15 @@ type PageInfo {
   endCursor: String
 }
 
+enum Permission {
+  ADMIN
+  ITEM_CREATE
+  ITEM_DELETE
+  ITEM_UPDATE
+  PEMISSION_UPDATE
+  USER
+}
+
 type Query {
   item(where: ItemWhereUniqueInput!): Item
   items(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Item]!
@@ -385,9 +395,11 @@ type Query {
   users: [User]
 }
 
-type User implements Node {
-  id: ID!
+type User {
+  id: String!
   name: String!
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  email: String!
+  resetToken: String
+  resetTokenExpiry: Float
+  permissions: [Permission]
 }
