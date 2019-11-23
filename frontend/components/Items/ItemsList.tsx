@@ -4,7 +4,7 @@ import Item from 'Components/Items/Item'
 import { Item as ItemProps } from 'GraphQL/types'
 
 type ItemsListProps = {
-  items: ItemProps[]
+  items?: ItemProps[]
 }
 
 const StyledItemsList = styled.div`
@@ -18,7 +18,7 @@ const StyledItemsList = styled.div`
 const ItemsList: FC<ItemsListProps> = ({ items }: ItemsListProps) => (
   <StyledItemsList>
     {
-      items.map(item => (
+      items?.map(item => (
         <Item
           key={ item.id }
           { ...item }

@@ -2,6 +2,6 @@ import { NextPage } from 'next'
 import CreateItem from 'Components/CreateItem'
 import withApollo from 'Lib/apollo'
 
-const Sell: NextPage = () => <CreateItem />
+const SellPage: NextPage = () => <CreateItem />
 
-export default withApollo(Sell)
+export default withApollo(SellPage)

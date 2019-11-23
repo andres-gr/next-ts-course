@@ -382,6 +382,21 @@ export type User = {
   permissions?: Maybe<Array<Maybe<Permission>>>,
 };
 
+export type SignupMutationVariables = {
+  email: Scalars['String'],
+  name: Scalars['String'],
+  password: Scalars['String']
+};
+
+
+export type SignupMutation = (
+  { __typename?: 'Mutation' }
+  & { signup: (
+    { __typename?: 'User' }
+    & UserFragment
+  ) }
+);
+
 export type CreateItemMutationVariables = {
   data: ItemCreateInput
 };
@@ -731,6 +746,40 @@ export const UserDeepNestingFragmentDoc = gql`
   permissions
 }
     `;
+export const SignupDocument = gql`
+    mutation SIGNUP($email: String!, $name: String!, $password: String!) {
+  signup(email: $email, name: $name, password: $password) {
+    ...User
+  }
+}
+    ${UserFragmentDoc}`;
+export type SignupMutationFn = ApolloReactCommon.MutationFunction<SignupMutation, SignupMutationVariables>;
+
+/**
+ * __useSignupMutation__
+ *
+ * To run a mutation, you first call `useSignupMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSignupMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [signupMutation, { data, loading, error }] = useSignupMutation({
+ *   variables: {
+ *      email: // value for 'email'
+ *      name: // value for 'name'
+ *      password: // value for 'password'
+ *   },
+ * });
+ */
+export function useSignupMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<SignupMutation, SignupMutationVariables>) {
+        return ApolloReactHooks.useMutation<SignupMutation, SignupMutationVariables>(SignupDocument, baseOptions);
+      }
+export type SignupMutationHookResult = ReturnType<typeof useSignupMutation>;
+export type SignupMutationResult = ApolloReactCommon.MutationResult<SignupMutation>;
+export type SignupMutationOptions = ApolloReactCommon.BaseMutationOptions<SignupMutation, SignupMutationVariables>;
 export const CreateItemDocument = gql`
     mutation CREATE_ITEM($data: ItemCreateInput!) {
   createItem(data: $data) {

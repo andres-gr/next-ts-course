@@ -33,7 +33,7 @@ const Items: FC<ItemsProps> = ({ page }: ItemsProps) => {
   
   if (error) return <p>Error: { error.message }</p>
   
-  const { items } = data || {}
+  const items = data?.items
   
   return (
     <Center>

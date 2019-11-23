@@ -32,7 +32,7 @@ const Fields: FC<FieldsProps> = ({
   const onFileChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     handleFileChange(e)
     const { files } = e.target
-    if (files.length > 0) {
+    if (files?.[0]) {
       handleSetFile(files)
       return
     }

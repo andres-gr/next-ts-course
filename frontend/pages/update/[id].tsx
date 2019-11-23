@@ -2,6 +2,6 @@ import { NextPage } from 'next'
 import UpdateItem from 'Components/UpdateItem'
 import withApollo from 'Lib/apollo'
 
-const Update: NextPage = () => <UpdateItem />
+const UpdatePage: NextPage = () => <UpdateItem />
 
-export default withApollo(Update)
+export default withApollo(UpdatePage)

@@ -3,6 +3,6 @@ import SingleItem from 'Components/SingleItem'
 import withApollo from 'Lib/apollo'
 import { PageProps } from 'Utils/types'
 
-const Item: NextPage<PageProps> = ({ query }: PageProps) => <SingleItem id={ query?.id } />
+const ItemPage: NextPage<PageProps> = ({ query }: PageProps) => <SingleItem id={ query?.id } />
 
-export default withApollo(Item)
+export default withApollo(ItemPage)
