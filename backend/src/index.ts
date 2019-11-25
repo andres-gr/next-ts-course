@@ -1,10 +1,24 @@
 import cookieParser from 'cookie-parser'
+import { verify } from 'jsonwebtoken'
 import 'Startup/dotenv'
 import create from './server'
+
+type TokenDecode = {
+  userId?: string
+}
 
 const server = create()
 
 server.express.use(cookieParser())
+
+server.express.use((req, res, next) => {
+  const { token } = req.cookies
+  if (token) {
+    const result = verify(token, process.env.APP_SECRET) as TokenDecode
+    req.userId = result.userId
+  }
+  next()
+})
 
 server.start(
   {

@@ -17,6 +17,7 @@ declare module '*/query.graphql' {
   export const ALL_ITEMS: DocumentNode;
 export const SINGLE_ITEM: DocumentNode;
 export const ITEMS_PAGINATION: DocumentNode;
+export const ME: DocumentNode;
 
   export default defaultDocument;
 }

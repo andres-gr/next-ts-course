@@ -22,7 +22,7 @@ function createApolloClient (initialState = {}) {
     ssrMode : typeof window === 'undefined', // Disables forceFetch on the server (so queries are only run once)
     link    : new HttpLink({
       uri         : APOLLO_URL, // Server URL (must be absolute)
-      credentials : 'same-origin', // Additional fetch() options like `credentials` or `headers`
+      credentials : 'include', // Additional fetch() options like `credentials` or `headers`
       fetch,
     }),
     cache: cache.restore(initialState),

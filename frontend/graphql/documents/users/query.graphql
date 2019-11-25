@@ -1,0 +1,7 @@
+#import "../../generated/app-client.fragments.graphql"
+
+query ME {
+  me {
+    ...User
+  }
+}

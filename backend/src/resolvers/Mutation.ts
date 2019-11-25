@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs'
-import jwt from 'jsonwebtoken'
+import { sign } from 'jsonwebtoken'
 import { MutationResolvers } from 'Resolvers/generated'
 import { Item } from 'Prisma/generated/prisma-client'
 
@@ -31,7 +31,7 @@ const Mutation: MutationResolvers.Type = {
         set: ['USER'],
       },
     })
-    const token = jwt.sign(
+    const token = sign(
       { userId: user.id },
       process.env.APP_SECRET,
     )
