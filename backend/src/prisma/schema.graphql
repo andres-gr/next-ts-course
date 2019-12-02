@@ -16,7 +16,10 @@ type Mutation {
     data: ItemUpdateInput!,
     where: ItemWhereUniqueInput!
   ): Item!
-  
+  signin(
+    email: String!,
+    password: String!
+  ): User!
   signup(
     email: String!,
     name: String!,

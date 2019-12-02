@@ -355,6 +355,7 @@ type Mutation {
   createItem(data: ItemCreateInput!): Item!
   deleteItem(where: ItemWhereUniqueInput!): Item
   updateItem(data: ItemUpdateInput!, where: ItemWhereUniqueInput!): Item!
+  signin(email: String!, password: String!): User!
   signup(email: String!, name: String!, password: String!): User!
 }
 

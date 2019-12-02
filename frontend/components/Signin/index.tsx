@@ -3,40 +3,40 @@ import {
   useCallback,
 } from 'react'
 import { Formik } from 'formik'
-import signupSchema from 'Schemas/signup'
+import signinSchema from 'Schemas/signin'
 import delay from 'Lib/delay'
-import SignupFields from 'Components/Signup/Fields'
-import { useSignupMutation } from 'GraphQL/types'
-import { HandleSubmitSignup } from 'Utils/types'
+import { useSigninMutation } from 'GraphQL/types'
+import { HandleSubmitSignin } from 'Utils/types'
+import SigninFields from 'Components/Signin/Fields'
 import { ME } from 'Documents/users/query.graphql'
 
-const Signup: FC = () => {
+const Signin: FC = () => {
   const [
-    signup,
+    signin,
     {
       error,
       loading,
     },
-  ] = useSignupMutation()
+  ] = useSigninMutation()
   
-  const _handleSubmit = useCallback<HandleSubmitSignup>(async values => {
+  const _handleSubmit = useCallback<HandleSubmitSignin>(async values => {
     await delay(1200)
-    const response = await signup({
+    const response = await signin({
       refetchQueries : [{ query: ME }],
       variables      : values,
     })
     console.log(response)
-  }, [signup])
+  }, [signin])
   
   return (
     <Formik
-      initialValues={ signupSchema.default() }
-      validationSchema={ signupSchema }
+      initialValues={ signinSchema.default() }
+      validationSchema={ signinSchema }
       onSubmit={ _handleSubmit }
     >
       {
         props => (
-          <SignupFields
+          <SigninFields
             { ...props }
             error={ error }
             loading={ loading }
@@ -47,4 +47,4 @@ const Signup: FC = () => {
   )
 }
 
-export default Signup
+export default Signin

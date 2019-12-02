@@ -1276,6 +1276,11 @@ export namespace MutationResolvers {
     where: ItemWhereUniqueInput;
   }
 
+  export interface ArgsSignin {
+    email: string;
+    password: string;
+  }
+
   export interface ArgsSignup {
     email: string;
     name: string;
@@ -1331,6 +1336,23 @@ export namespace MutationResolvers {
           ctx: Context,
           info: GraphQLResolveInfo
         ) => Item | Promise<Item>;
+      };
+
+  export type SigninResolver =
+    | ((
+        parent: undefined,
+        args: ArgsSignin,
+        ctx: Context,
+        info: GraphQLResolveInfo
+      ) => User | Promise<User>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: undefined,
+          args: ArgsSignin,
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => User | Promise<User>;
       };
 
   export type SignupResolver =
@@ -1400,6 +1422,23 @@ export namespace MutationResolvers {
             ctx: Context,
             info: GraphQLResolveInfo
           ) => Item | Promise<Item>;
+        };
+
+    signin:
+      | ((
+          parent: undefined,
+          args: ArgsSignin,
+          ctx: Context,
+          info: GraphQLResolveInfo
+        ) => User | Promise<User>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: undefined,
+            args: ArgsSignin,
+            ctx: Context,
+            info: GraphQLResolveInfo
+          ) => User | Promise<User>;
         };
 
     signup:

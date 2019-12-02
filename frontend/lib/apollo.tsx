@@ -72,9 +72,9 @@ function withApollo (PageComponent, { ssr = true } = {}) {
   if (process.env.NODE_ENV !== 'production') {
     const displayName = PageComponent.displayName || PageComponent.name || 'Component'
     
-    if (displayName === 'App') {
-      console.warn('This withApollo HOC only works with PageComponents.')
-    }
+    // if (displayName === 'App') {
+    //   console.warn('This withApollo HOC only works with PageComponents.')
+    // }
     
     WithApollo.displayName = `withApollo(${displayName})`
   }
@@ -140,5 +140,7 @@ function withApollo (PageComponent, { ssr = true } = {}) {
   
   return WithApollo
 }
+
+export { apolloClient }
 
 export default withApollo

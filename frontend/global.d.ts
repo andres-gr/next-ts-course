@@ -3,6 +3,7 @@ declare module '*/mutation.graphql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const SIGNUP: DocumentNode;
+export const SIGNIN: DocumentNode;
 export const CREATE_ITEM: DocumentNode;
 export const DELETE_ITEM: DocumentNode;
 export const UPDATE_ITEM: DocumentNode;

@@ -13,6 +13,26 @@ const Mutation: MutationResolvers.Type = {
       .$fragment<Pick<Item, 'id'>>('{ id }')
     return prismaClient.deleteItem({ id: item.id })
   },
+  signin: async (_parent,
+    {
+      email,
+      password,
+    }, {
+      prismaClient,
+      response,
+    },
+  ) => {
+    const user = await prismaClient.user({ email })
+    if (!user) throw new Error(`No user found for email ${email}`)
+    const valid = await bcrypt.compare(password, user.password)
+    if (!valid) throw new Error('Invalid password!')
+    const token = sign({ userId: user.id }, process.env.APP_SECRET)
+    response.cookie('token', token, {
+      httpOnly : true,
+      maxAge   : 1000 * 60 * 60 * 24 * 365,
+    })
+    return user
+  },
   signup: async (_parent,
     {
       name,
@@ -20,7 +40,8 @@ const Mutation: MutationResolvers.Type = {
     }, {
       prismaClient,
       response,
-    }) => {
+    },
+  ) => {
     const email = rest.email.toLowerCase(),
           password = await bcrypt.hash(rest.password, 10)
     const user = await prismaClient.createUser({

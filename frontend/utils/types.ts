@@ -1,9 +1,10 @@
 import { ReactNode } from 'react'
 import { InferProps } from 'prop-types'
-import { ItemCreateInput } from 'GraphQL/types'
 import { FormikProps } from 'formik'
 import { AxiosError } from 'axios'
+import { ItemCreateInput } from 'GraphQL/types'
 import { SignupSchema } from 'Schemas/signup'
+import { SigninSchema } from 'Schemas/signin'
 
 export type ChildrenProps = { children: ReactNode }
 
@@ -18,6 +19,8 @@ export type Files = {
 export type HandleFileUpload = (files?: FileList | null) => void
 
 export type HandleSubmit = (values: CreateItemValues, formikArgs: FormikProps<CreateItemValues>) => void
+
+export type HandleSubmitSignin = (values: SigninSchema, formikArgs: SignupFormikArgs) => void
 
 export type HandleSubmitSignup = (values: SignupSchema, formikArgs: SignupFormikArgs) => void
 
@@ -38,6 +41,8 @@ export type PageProps = {
     [x: string]: string
   }
 }
+
+export type SigninFormikArgs = FormikProps<SigninSchema>
 
 export type SignupFormikArgs = FormikProps<SignupSchema>
 

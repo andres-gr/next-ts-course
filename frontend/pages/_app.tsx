@@ -1,5 +1,6 @@
 import NextApp, { AppContext } from 'next/app'
 import Page from 'Components/Page'
+import withApollo from 'Lib/apollo'
 
 type InitPageProps = {
   query?: {
@@ -35,4 +36,4 @@ class App extends NextApp<NextInitProps> {
   }
 }
 
-export default App
+export default withApollo(App)
